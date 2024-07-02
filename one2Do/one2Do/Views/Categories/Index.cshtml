@@ -1,88 +1,12 @@
-﻿@* the following is from COdingEvents add.cshtml...until line 34 *@
-@using CodingEvents.ViewModels
-@model AddEventViewModel
+﻿@using one2Do.Models 
+@model Categories
+@{
 
-<h1>Add Event</h1>
-
-<form asp-controller="Events" asp-action="Add" method="post">
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control"/>
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Description"></label>
-        <input asp-for="Description" class="form-control"/>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ContactEmail">Contact Email</label>
-        <input asp-for="ContactEmail" class="form-control"/>
-        <span asp-validation-for="ContactEmail" class="text-danger"></span>
-    </div>
-    <input type="submit" value="Add Event" />
-</form>
-
-@* The following is from CodingEvents ...Events/delete.cshtml, through line 51 below *@
-<h1>Delete Event</h1>
-
-<form method="post">
-    @foreach (var evt in ViewBag.events)
-{
-            <div class="form-group">
-                <label>
-                    <span>@evt.Name</span>
-                    <input type="checkbox" name="eventIds" value="@evt.Id" />
-                </label>
-            </div>
 }
 
-    <input type="submit" value="Delete Selected Events" class="btn btn-danger" />
-</form>
- 
- @* The following is from CodingEvents Events/index.cshtml...through line 98 *@
- @using CodingEvents.Models
-@model List<Event>
-
-<h1>Coding Events</h1>
-
-<p>
-    <a asp-controller="Events" asp-action="Add">Add Event</a>
-</p>
-
-<p>
-    <a asp-controller="Events" asp-action="Delete">Delete Event</a>
-</p>
-
-@if (Model.Count == 0)
-{
-    <p>No events yet!</p>
-}
-else
-{
-    <table class="table">
-        <tr>
-            <th>
-                Id
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-                Contact Email
-            </th>
-        </tr>
-        @foreach (var evt in Model)
-        {
-            <tr>
-                <td>@evt.Id</td>
-                <td>@evt.Name</td>
-                <td>@evt.Description </td>
-                <td>@evt.ContactEmail</td>
-            </tr>
-        }
-    </table>
-}
+<h1> Categories </h1>
+<div>
+    <p>
+        This is a personalized list 
+    </p>
+</div>

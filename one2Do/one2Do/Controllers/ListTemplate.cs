@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using one2Do.Models;
 
 namespace one2Do.Controllers;
 
+[Route("/ListTemplate")]
 public class ListTemplateController : Controller
 {
     private one2doDbContext context;
@@ -11,8 +13,10 @@ public class ListTemplateController : Controller
         context= dbContext;
     }
     
-    public IActionResult Index()
+    [HttpGet("")]
+    public IActionResult RenderListTemplatePage()
     {
-        return View();
+        ListTemplate newList= new ListTemplate();
+        return View("Index",newList );
     }
 }

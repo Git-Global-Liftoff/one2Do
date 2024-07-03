@@ -5,6 +5,10 @@ using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 // var connectionString = builder.Configuration.GetConnectionString("one2doDbContextConnection") ?? throw new InvalidOperationException("Connection string 'one2doDbContextConnection' not found.");
 
+
+builder.Services.AddScoped<IWForecastRepository, WForecastRepository>();
+
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Identity.Client;
 using one2Do.Models;
@@ -7,6 +8,8 @@ using one2Do.WeatherModel;
 
 namespace one2Do.Controllers;
 
+
+[Authorize]
 public class WeatherController : Controller
 {
     private readonly IWForecastRepository _WForecastRepository;

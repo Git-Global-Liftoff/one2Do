@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using one2Do.Models;
 using one2Do.Models.QuoteModels; // Add namespace for Quote model
+using one2Do.Models.ToDoModels; //Add namespace for ToDoModels
 
 namespace one2Do
 {
@@ -14,6 +15,8 @@ namespace one2Do
         }
 
         // DbSet property for Quotes table
-        public DbSet<Quote> Quotes { get; set; }
+        public DbSet<Quote> Quotes { get; set; } //Add DbSet for Quote
+        public DbSet<ToDoList> ToDoLists { get; set; } // Add DbSet for ToDoList
+        public DbSet<TaskItem> TaskItems { get; set; } // Add DbSet for TaskItem
     }
 }

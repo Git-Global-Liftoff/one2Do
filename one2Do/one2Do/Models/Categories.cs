@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace one2Do;
+namespace one2Do.Models;
 
 public class Categories
 {

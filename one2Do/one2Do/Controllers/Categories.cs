@@ -26,10 +26,10 @@ public class CategoriesController : Controller
         return View();
     }
 
-    [HttpGet]
+//     [HttpGet]
 
-    public IActionResult ////////do i need this? See codingEvents line 39 in EventCategoryController.cs
-    //this is checkign to see if model is valid....
+//     public IActionResult ////////do i need this? See codingEvents line 39 in EventCategoryController.cs
+//     //this is checkign to see if model is valid....
 
-}
+ }
 

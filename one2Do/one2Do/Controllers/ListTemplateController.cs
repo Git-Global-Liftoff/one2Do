@@ -19,4 +19,5 @@ public class ListTemplateController : Controller
         ListTemplate newList= new ListTemplate();
         return View("Index",newList );
     }
+    
 }

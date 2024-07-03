@@ -8,14 +8,22 @@
 </div>
 
 <div>
-    <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link text-dark"  asp-area="" asp-controller="User" asp-action="Todo">Todo</a>
-            </li>
-    </ul>
-    <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Weather" asp-action="SearchByCity">Weather</a>
-            </li>
-    </ul>
+    
+     <form method = "get">
+                <button asp-controller="ListTemplate" asp-action="index" class="btn btn-primary"> Create New List</button>
+            </form>   
+
+            
+    <form method = "get">
+                <button asp-controller="ChooseTemplate" asp-action="index" class="btn btn-primary"> View Generic Templates</button>
+            </form>   
+
+             <form method = "get">
+                <button asp-controller="user" asp-action="Todo" class="btn btn-primary"> Your Lists</button>
+            </form>   
+
+            
+    <form method = "get">
+                <button asp-controller="Weather" asp-action="searchByCity" class="btn btn-primary"> View Weather</button>
+            </form>   
 </div>

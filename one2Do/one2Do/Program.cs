@@ -16,7 +16,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 var connectionString = "server=localhost;user=one2do;password=gitglobal;database=one2do";
-var serverVersion = new MySqlServerVersion(new Version(8, 0, 36));
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 37));
 
 
 builder.Services.AddDbContext<one2doDbContext>(dbContextOptions => dbContextOptions.UseMySql(connectionString, serverVersion));

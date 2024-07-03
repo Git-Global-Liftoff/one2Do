@@ -2,12 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using one2Do;
 using Microsoft.AspNetCore.Identity;
 using one2Do.Models;
+using one2Do.Data;  // included needed using statement 
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddScoped<IWForecastRepository, WForecastRepository>();
-
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -18,9 +17,8 @@ builder.Services.AddRazorPages();
 var connectionString = "server=localhost;user=one2do;password=gitglobal;database=one2do";
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 37));
 
-
-builder.Services.AddDbContext<one2doDbContext>(dbContextOptions => dbContextOptions.UseMySql(connectionString, serverVersion));
-
+builder.Services.AddDbContext<one2doDbContext>(dbContextOptions => 
+    dbContextOptions.UseMySql(connectionString, serverVersion));
 
 //Following code was edited. Commented the original builder
 // builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<one2doDbContext>();
@@ -31,7 +29,6 @@ builder.Services.AddIdentity<User, IdentityRole>(
         options.Password.RequireNonAlphanumeric = false;
     })
     .AddEntityFrameworkStores<one2doDbContext>().AddDefaultTokenProviders();
-
 
 var app = builder.Build();
 
@@ -56,5 +53,12 @@ app.MapControllers();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// Call the DbInitializer to seed the database with quotes
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    DbInitializer.Initialize(services);
+}
 
 app.Run();

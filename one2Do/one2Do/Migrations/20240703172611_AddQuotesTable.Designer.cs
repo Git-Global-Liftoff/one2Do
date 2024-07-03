@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using one2Do;
 
@@ -11,9 +12,11 @@ using one2Do;
 namespace one2Do.Migrations
 {
     [DbContext(typeof(one2doDbContext))]
-    partial class one2doDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240703172611_AddQuotesTable")]
+    partial class AddQuotesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -172,48 +175,6 @@ namespace one2Do.Migrations
                     b.ToTable("Quotes");
                 });
 
-            modelBuilder.Entity("one2Do.Models.ToDoModels.TaskItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("IsCompleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<int>("ToDoListId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ToDoListId");
-
-                    b.ToTable("TaskItems");
-                });
-
-            modelBuilder.Entity("one2Do.Models.ToDoModels.ToDoList", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ToDoLists");
-                });
-
             modelBuilder.Entity("one2Do.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -335,22 +296,6 @@ namespace one2Do.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("one2Do.Models.ToDoModels.TaskItem", b =>
-                {
-                    b.HasOne("one2Do.Models.ToDoModels.ToDoList", "ToDoList")
-                        .WithMany("Tasks")
-                        .HasForeignKey("ToDoListId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ToDoList");
-                });
-
-            modelBuilder.Entity("one2Do.Models.ToDoModels.ToDoList", b =>
-                {
-                    b.Navigation("Tasks");
                 });
 #pragma warning restore 612, 618
         }

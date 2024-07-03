@@ -23,7 +23,7 @@ namespace one2Do.Data
                     new Quote { Text = "You're doing great! Keep it up!" },
                     new Quote { Text = "Small steps lead to big changes." },
                     new Quote { Text = "Every day is a fresh start." },
-                    // Will add remaining quotes later
+                    // Add remaining quotes later
                 };
 
                 foreach (Quote q in quotes)

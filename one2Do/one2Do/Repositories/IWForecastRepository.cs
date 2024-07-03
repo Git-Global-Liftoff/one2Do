@@ -1,4 +1,4 @@
-﻿using one2Do.OpenWeatherMap_Model;
+﻿using one2Do.WeatherModel;
 
 namespace one2Do;
 

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace one2Do.OpenWeatherMap_Model;
+namespace one2Do.WeatherModel;
 
 public class City
 {

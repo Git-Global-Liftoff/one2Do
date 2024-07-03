@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Identity.Client;
 using one2Do.Models;
-using one2Do.OpenWeatherMap_Model;
+using one2Do.WeatherModel;
 
 
 namespace one2Do.Controllers;

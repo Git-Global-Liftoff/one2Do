@@ -3,7 +3,7 @@ using Microsoft.DotNet.Scaffolding.Shared.CodeModifier.CodeChange;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
-using one2Do.OpenWeatherMap_Model;
+using one2Do.WeatherModel;
 
 namespace one2Do;
 

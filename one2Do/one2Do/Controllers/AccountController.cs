@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using one2Do.Models;
 using one2Do.ViewModels;
+using System.Threading.Tasks;
 
 namespace one2Do.Controllers;
 
@@ -32,20 +33,31 @@ public class AccountController : Controller
     [HttpPost]
     public async Task<IActionResult> Login (LoginViewModel model)
     {
-        if (ModelState.IsValid)
-        {
-            var result = await signInManager.PasswordSignInAsync(model.Username!, model.Password!, model.RememberMe, false);
-
-            if(result.Succeeded)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "User");
-            }
-            ModelState.AddModelError("", "Invalid login attempt");
-            return View(model);
+                var user = await userManager.FindByNameAsync(model.Username);
+                if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
+                {
+                    var signInResult = await signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
+                    if (signInResult.Succeeded)
+                    {
+                        // Increment streak points on every login
+                        user.StreakPoints += 1;
+                        await userManager.UpdateAsync(user);
 
-        }
+                        return RedirectToAction("Index", "User");
+                    }
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                }
+            }
+
         return View(model);
-    }
+        }
+    
     
     
     public IActionResult Register ()

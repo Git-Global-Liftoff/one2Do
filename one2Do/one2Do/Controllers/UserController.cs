@@ -2,7 +2,8 @@
 using one2Do.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using Microsoft.AspNetCore.Authorization; // Added this using directive
+using Microsoft.AspNetCore.Authorization;
+using one2Do.Models;
 
 namespace one2Do.Controllers
 {
@@ -33,6 +34,24 @@ namespace one2Do.Controllers
         public IActionResult Todo()
         {
             return View();
+        }
+
+        // Action to handle search by category
+        [HttpPost]
+        public IActionResult SearchByCategory(string category)
+        {
+            var lists = _context.ListTemplates
+                .Include(lt => lt.TaskItems)
+                .Include(lt => lt.Categories)
+                .AsEnumerable() //helped solve the exception error on search results page 
+                .Where(lt => lt.Categories != null && lt.Categories.Any(c => c.ListType.Contains(category)))
+                .ToList();
+
+            // Pass the search results to the view
+            ViewData["Lists"] = lists;
+            ViewData["Category"] = category;
+
+            return View(lists);
         }
     }
 }

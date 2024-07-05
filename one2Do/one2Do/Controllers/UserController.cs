@@ -1,6 +1,6 @@
 
-﻿using Microsoft.AspNetCore.Identity;
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using one2Do.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;

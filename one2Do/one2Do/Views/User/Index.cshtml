@@ -3,27 +3,44 @@
 }
 
 <div class="text-center">
+
     <h1 class="display-4">@Model.Name's Profile</h1>
     <p>Streak Points: @Model.StreakPoints</a>.</p>
+
 </div>
 
 <div>
-    
-     <form method = "get">
-                <button asp-controller="ListTemplate" asp-action="index" class="btn btn-primary"> Create New List</button>
-            </form>   
+    <p>@ViewData["Quote"]</p> <!-- Display the random quote here -->
 
-            
-    <form method = "get">
-                <button asp-controller="ChooseTemplate" asp-action="index" class="btn btn-primary"> View Generic Templates</button>
-            </form>   
+    <form method="get">
+        <button asp-controller="ListTemplate" asp-action="Index" class="btn btn-primary">Create New List</button>
+    </form>
 
-             <form method = "get">
-                <button asp-controller="user" asp-action="Todo" class="btn btn-primary"> Your Lists</button>
-            </form>   
+    <form method="get">
+        <button asp-controller="ChooseTemplate" asp-action="Index" class="btn btn-primary">View Generic Templates</button>
+    </form>
 
-            
-    <form method = "get">
-                <button asp-controller="Weather" asp-action="searchByCity" class="btn btn-primary"> View Weather</button>
-            </form>   
+    <form method="get">
+        <button asp-controller="User" asp-action="Todo" class="btn btn-primary">Your Lists</button>
+    </form>
+
+    <form method="get">
+        <button asp-controller="Weather" asp-action="SearchByCity" class="btn btn-primary">View Weather</button>
+    </form>
+
+    <!-- Form for searching by category -->
+    <form asp-controller="User" asp-action="SearchByCategory" method="post">
+        <div class="form-group">
+            <label for="category">Select Category:</label>
+            <select name="category" class="form-control">
+                <option value="">-- Select Category --</option>
+                <option value="household">Household</option>
+                <option value="errands">Errands</option>
+                <option value="professional">Professional</option>
+                <option value="personal">Personal</option>
+            </select>
+        </div>
+        <br />
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </form>
 </div>

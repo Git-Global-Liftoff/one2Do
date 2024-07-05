@@ -1,30 +1,70 @@
+
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using one2Do.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+
 using one2Do.Models;
 
-namespace one2Do.Controllers;
-
-public class UserController : Controller
+namespace one2Do.Controllers
 {
-    private readonly UserManager<User> userManager;
-    public UserController(UserManager<User> userManager)
+
+    [Authorize] // To ensure only authenticated users can access actions within this controller
+    public class UserController : Controller
     {
-        this.userManager= userManager;
-    }
-    public async Task<IActionResult> Index()
-    {
-        var user = await userManager.GetUserAsync(User);
-        if (user == null)
+        private readonly UserManager<User> userManager;
+
+        private readonly one2doDbContext _context;
+
+
+        // Constructor to initialize the database context
+        public UserController(one2doDbContext context, UserManager<User> userManager)
         {
-            return RedirectToAction("Login", "Account");
+            _context = context;
+            this.userManager= userManager;
         }
-        return View(user);
+
+        // Action to handle requests to the User's main page
+        public async Task<IActionResult> Index()
+        {
+            var user = await userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            // Get a random quote from the database
+            var quote = _context.Quotes.OrderBy(q => EF.Functions.Random()).FirstOrDefault();
+
+            // Pass the quote to the view using ViewData
+            ViewData["Quote"] = quote?.Text;
+
+            return View(user);
+        }
+
+        // Action to handle requests to the user's To-Do list page
+        public IActionResult Todo()
+        {
+            return View();
+        }
+
+        // Action to handle search by category
+        [HttpPost]
+        public IActionResult SearchByCategory(string category)
+        {
+            var lists = _context.ListTemplates
+                .Include(lt => lt.TaskItems)
+                .Include(lt => lt.Categories)
+                .AsEnumerable() //helped solve the exception error on search results page 
+                .Where(lt => lt.Categories != null && lt.Categories.Any(c => c.ListType.Contains(category)))
+                .ToList();
+
+            // Pass the search results to the view
+            ViewData["Lists"] = lists;
+            ViewData["Category"] = category;
+
+            return View(lists);
+        }
     }
-
-    public IActionResult Todo()
-    {
-        return View();
-    }
-
-
 }

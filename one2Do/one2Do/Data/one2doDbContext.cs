@@ -14,9 +14,10 @@ namespace one2Do
         {
         }
 
-        // DbSet property for Quotes table
+        // Add DbSet property for each model
         public DbSet<Quote> Quotes { get; set; } //Add DbSet for Quote
         public DbSet<ToDoList> ToDoLists { get; set; } // Add DbSet for ToDoList
         public DbSet<TaskItem> TaskItems { get; set; } // Add DbSet for TaskItem
+        public DbSet<ListTemplate> ListTemplates { get; set; }  // Add DbSet for ListTemplate
     }
 }

@@ -12,8 +12,8 @@ using one2Do;
 namespace one2Do.Migrations
 {
     [DbContext(typeof(one2doDbContext))]
-    [Migration("20240703161804_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240705222558_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,6 +157,108 @@ namespace one2Do.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("one2Do.Models.Categories", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ListTemplateId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ListTemplateId");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("one2Do.Models.ListTemplate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Title")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ListTemplates");
+                });
+
+            modelBuilder.Entity("one2Do.Models.QuoteModels.Quote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Quotes");
+                });
+
+            modelBuilder.Entity("one2Do.Models.ToDoModels.TaskItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("DueDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int?>("ListTemplateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ToDoListId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ListTemplateId");
+
+                    b.HasIndex("ToDoListId");
+
+                    b.ToTable("TaskItems");
+                });
+
+            modelBuilder.Entity("one2Do.Models.ToDoModels.ToDoList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ToDoLists");
+                });
+
             modelBuilder.Entity("one2Do.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -164,9 +266,6 @@ namespace one2Do.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("longtext");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -178,6 +277,9 @@ namespace one2Do.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("LastLoginDate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
@@ -209,6 +311,9 @@ namespace one2Do.Migrations
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
+
+                    b.Property<int>("StreakPoints")
+                        .HasColumnType("int");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("tinyint(1)");
@@ -278,6 +383,40 @@ namespace one2Do.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("one2Do.Models.Categories", b =>
+                {
+                    b.HasOne("one2Do.Models.ListTemplate", null)
+                        .WithMany("Categories")
+                        .HasForeignKey("ListTemplateId");
+                });
+
+            modelBuilder.Entity("one2Do.Models.ToDoModels.TaskItem", b =>
+                {
+                    b.HasOne("one2Do.Models.ListTemplate", null)
+                        .WithMany("TaskItems")
+                        .HasForeignKey("ListTemplateId");
+
+                    b.HasOne("one2Do.Models.ToDoModels.ToDoList", "ToDoList")
+                        .WithMany("TaskItems")
+                        .HasForeignKey("ToDoListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ToDoList");
+                });
+
+            modelBuilder.Entity("one2Do.Models.ListTemplate", b =>
+                {
+                    b.Navigation("Categories");
+
+                    b.Navigation("TaskItems");
+                });
+
+            modelBuilder.Entity("one2Do.Models.ToDoModels.ToDoList", b =>
+                {
+                    b.Navigation("TaskItems");
                 });
 #pragma warning restore 612, 618
         }

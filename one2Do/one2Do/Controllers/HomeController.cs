@@ -12,22 +12,14 @@ namespace one2Do.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly one2doDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger, one2doDbContext context)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _context = context;
         }
 
         public IActionResult Index()
         {
-            // Get a random quote from the database
-            var quote = _context.Quotes.OrderBy(q => EF.Functions.Random()).FirstOrDefault();
-
-            // Pass the quote to the view
-            ViewData["Quote"] = quote?.Text;
-
             return View();
         }
 

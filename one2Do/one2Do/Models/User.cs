@@ -9,5 +9,7 @@ public class User : IdentityUser
     [MaxLength(100)]
     [Required]
     public string? Name { get; set; }
+    public int StreakPoints { get; set; }
+    public DateTime? LastLoginDate {get; set; }
 
 }

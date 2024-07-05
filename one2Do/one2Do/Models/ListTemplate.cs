@@ -1,8 +1,10 @@
+
 ﻿using one2Do.Models.ToDoModels; // Added missing namespace 
 
 namespace one2Do.Models;
 
 public class ListTemplate
+
     {
         public int Id { get; set; }
         public string? Title { get; set; }

@@ -83,7 +83,7 @@ public class AccountController : Controller
             {
                 await signInManager.SignInAsync(user, false);
                 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "User");
 
             }
             foreach (var error in result.Errors)

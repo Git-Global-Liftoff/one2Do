@@ -4,8 +4,15 @@ namespace one2Do.ViewModels;
 
 public class RegisterViewModel
 {
+    [StringLength(100)]
+    [MaxLength(100)]
     [Required]
-    public string? Name { get; set; }
+    public string? FirstName { get; set; }
+    
+    [StringLength(100)]
+    [MaxLength(100)]
+    [Required]
+    public string? LastName { get; set; }
     
     [Required]
     [DataType(DataType.EmailAddress)]
@@ -17,5 +24,6 @@ public class RegisterViewModel
     
     [Compare("Password", ErrorMessage = "Passwords don't match.")]
     [Display(Name = "Confirm Password")]
+    [DataType(DataType.Password)]
     public string? ConfirmPassword { get; set; }
 }

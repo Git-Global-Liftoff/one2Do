@@ -1,9 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using one2Do.Models;
 
 namespace one2Do.WeatherModel;
 
 public class City
 {
+    [Key]
+    public int Id { get; set; }
+    public string UserId { get; set; } 
+
     [Display(Name = "City name:")]
     public string Name { get; set;}
 
@@ -22,4 +27,5 @@ public class City
     [Display(Name = "Weather Condition:.")]
     public string Weather { get; set;}
 
+    public User User { get; set; }
 }

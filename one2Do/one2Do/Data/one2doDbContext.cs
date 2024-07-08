@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using one2Do.Models;
 using one2Do.Models.QuoteModels; // Add namespace for Quote model
-using one2Do.Models.ToDoModels; //Add namespace for ToDoModels
+using one2Do.Models.ToDoModels;
+using one2Do.WeatherModel; //Add namespace for ToDoModels
 
 namespace one2Do
 {
@@ -19,5 +20,21 @@ namespace one2Do
         public DbSet<ToDoList> ToDoLists { get; set; } // Add DbSet for ToDoList
         public DbSet<TaskItem> TaskItems { get; set; } // Add DbSet for TaskItem
         public DbSet<ListTemplate> ListTemplates { get; set; }  // Add DbSet for ListTemplate
+
+        public DbSet<City> Cities { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            // Define relationship between User and City
+            builder.Entity<City>()
+                .HasOne(c => c.User)
+                .WithMany(u => u.Cities)
+                .HasForeignKey(c => c.UserId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+        }
+
     }
 }

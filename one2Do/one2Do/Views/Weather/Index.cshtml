@@ -1,0 +1,62 @@
+@model one2Do.WeatherModel.MultipleCity
+
+@{
+    ViewData["Title"] = "Weather Widget";
+}
+
+<div class="container">
+    <h2>Weather Widget</h2>
+    <form method="post" asp-action="AddCity">
+        <div class="form-group">
+            <input type="text" name="cityName" class="form-control" placeholder="Enter city name..." />
+            <button type="submit" class="btn btn-primary mt-2">Add City</button>
+        </div>
+    </form>
+
+    <div class="mt-4">
+        @if (Model.Cities != null && Model.Cities.Any())
+        {
+            <h3>Weather for Added Cities</h3>
+            <div class="row">
+                @foreach (var city in Model.Cities)
+                {
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">@city.Name</h5>
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Temperature</th>
+                                            <td>@city.Temperature</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Humidity</th>
+                                            <td>@city.Humidity</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Weather</th>
+                                            <td>@city.Weather</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Wind Speed</th>
+                                            <td>@city.Wind</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>No cities added. Please add up to 3 cities to see their weather.</p>
+        }
+    </div>
+
+    <form method="get" action="User/Index">
+        <button type="submit" class="btn btn-primary mt-4">Go Back to Profile</button>
+    </form>
+</div>

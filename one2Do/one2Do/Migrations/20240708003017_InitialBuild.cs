@@ -248,6 +248,35 @@ namespace one2Do.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Cities",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Temperature = table.Column<float>(type: "float", nullable: false),
+                    Humidity = table.Column<int>(type: "int", nullable: false),
+                    Pressure = table.Column<int>(type: "int", nullable: false),
+                    Wind = table.Column<float>(type: "float", nullable: false),
+                    Weather = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cities", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cities_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
@@ -339,6 +368,11 @@ namespace one2Do.Migrations
                 column: "ListTemplateId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Cities_UserId",
+                table: "Cities",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TaskItems_ListTemplateId",
                 table: "TaskItems",
                 column: "ListTemplateId");
@@ -369,6 +403,9 @@ namespace one2Do.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Cities");
 
             migrationBuilder.DropTable(
                 name: "Quotes");

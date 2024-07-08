@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
+using one2Do.WeatherModel;
 
 namespace one2Do.Models;
 
@@ -15,5 +16,8 @@ public class User : IdentityUser
     public string? LastName { get; set; }
     public int StreakPoints { get; set; }
     public DateTime? LastLoginDate {get; set; }
+
+    public List<City> Cities { get; set; } = new List<City>();
+
 
 }

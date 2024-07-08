@@ -12,7 +12,7 @@ using one2Do;
 namespace one2Do.Migrations
 {
     [DbContext(typeof(one2doDbContext))]
-    [Migration("20240707193610_InitialBuild")]
+    [Migration("20240708003017_InitialBuild")]
     partial class InitialBuild
     {
         /// <inheritdoc />
@@ -339,6 +339,45 @@ namespace one2Do.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("one2Do.WeatherModel.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Humidity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Pressure")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Temperature")
+                        .HasColumnType("float");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Weather")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<float>("Wind")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Cities");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -412,6 +451,17 @@ namespace one2Do.Migrations
                     b.Navigation("ToDoList");
                 });
 
+            modelBuilder.Entity("one2Do.WeatherModel.City", b =>
+                {
+                    b.HasOne("one2Do.Models.User", "User")
+                        .WithMany("Cities")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("one2Do.Models.ListTemplate", b =>
                 {
                     b.Navigation("Categories");
@@ -422,6 +472,11 @@ namespace one2Do.Migrations
             modelBuilder.Entity("one2Do.Models.ToDoModels.ToDoList", b =>
                 {
                     b.Navigation("TaskItems");
+                });
+
+            modelBuilder.Entity("one2Do.Models.User", b =>
+                {
+                    b.Navigation("Cities");
                 });
 #pragma warning restore 612, 618
         }

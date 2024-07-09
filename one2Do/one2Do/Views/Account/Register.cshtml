@@ -1,4 +1,5 @@
 @using one2Do.ViewModels; 
+@using System;
 
 @model RegisterViewModel
 
@@ -31,6 +32,13 @@ ViewData["Title"] = "Register";
                 <label asp-for="ConfirmPassword" class="control-label"></label>
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            @* //2 user *@
+             <div class="form-floating">
+                <select asp-for="Role" asp-items="@Model.RoleList" class="form-select" aria-required="true">
+                    <option disabled selected>Select Role</option>
+                </select>
+                <span asp-validation-for="Role" class="text-danger"></span>
             </div>
             
             <div class="row">

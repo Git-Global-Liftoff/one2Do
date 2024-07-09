@@ -22,3 +22,7 @@ body {
   margin-bottom: 60px;
 }
 
+.center-content {
+  text-align: center;
+  margin: 0 auto;
+}

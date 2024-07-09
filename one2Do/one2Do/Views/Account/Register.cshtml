@@ -1,4 +1,5 @@
 @using one2Do.ViewModels; 
+@using System;
 
 @model RegisterViewModel
 
@@ -37,6 +38,13 @@ ViewData["Title"] = "Register";
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
+            @* //2 user *@
+             <div class="form-floating">
+                <select asp-for="Role" asp-items="@Model.RoleList" class="form-select" aria-required="true">
+                    <option disabled selected>Select Role</option>
+                </select>
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
             
             <div class="row">
                 <div class="col-8">
@@ -48,6 +56,12 @@ ViewData["Title"] = "Register";
             </div>
         </form>
     </div>
+</div>
+<hr>
+<div class="center-content">
+    <h4 >Account Options:</h4>
+    <h6><strong><em>Basic</em></strong>: Includes all features MINUS the ability to collect streak points for logging in to your profile.</h6>
+    <h6><strong><em>Premium</em></strong>: Includes all features AND the ability to collect streak points for logging in to your profile.</h6>
 </div>
     
 

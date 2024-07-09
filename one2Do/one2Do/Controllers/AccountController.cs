@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using one2Do.Models;
 using one2Do.ViewModels;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 
 namespace one2Do.Controllers;
 
@@ -62,7 +64,15 @@ public class AccountController : Controller
     
     public IActionResult Register ()
     {
-        return View();
+        var model = new RegisterViewModel
+    {
+        RoleList = new List<SelectListItem>
+        {
+            new SelectListItem { Value = "Basic", Text = "Basic" },
+            new SelectListItem { Value = "Premium", Text = "Premium" }
+        }
+        };
+        return View(model);
     }
     
     [HttpPost]
@@ -82,6 +92,10 @@ public class AccountController : Controller
 
             if (result.Succeeded)
             {
+                 if (!string.IsNullOrEmpty(model.Role))
+            {
+                await userManager.AddToRoleAsync(user, model.Role);
+            }
                 await signInManager.SignInAsync(user, false);
                 
                 return RedirectToAction("Index", "User");

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace one2Do.ViewModels;
 
@@ -26,4 +27,6 @@ public class RegisterViewModel
     [Display(Name = "Confirm Password")]
     [DataType(DataType.Password)]
     public string? ConfirmPassword { get; set; }
+    public string? Role {get; set; }
+    public IEnumerable<SelectListItem>? RoleList {get; set; }
 }

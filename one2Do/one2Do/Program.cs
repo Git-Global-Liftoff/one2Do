@@ -28,7 +28,9 @@ builder.Services.AddIdentity<User, IdentityRole>(
         options.SignIn.RequireConfirmedAccount = false;
         options.Password.RequireNonAlphanumeric = false;
     })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<one2doDbContext>().AddDefaultTokenProviders().AddDefaultUI();
+
 
 var app = builder.Build();
 
@@ -55,10 +57,23 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 // Call the DbInitializer to seed the database with quotes
+
+//two roles initialization
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     DbInitializer.Initialize(services);
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    var roles = new[] { "Basic", "Premium"};
+
+    foreach (var role in roles)
+    {
+        if(!await roleManager.RoleExistsAsync(role))
+        await roleManager.CreateAsync(new IdentityRole(role));
+    }
 }
+
+
 
 app.Run();

@@ -13,9 +13,9 @@ ViewData["Title"] = "Login";
         <form asp-action="Login" method="post">
             <div asp-validation-summary="ModelOnly"></div>
             <div class="mb-1">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span> 
+                <label asp-for="Email" class="control-label">Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span> 
             </div>
             <div class="mb-1">
                 <label asp-for="Password" class="control-label"></label>
@@ -39,9 +39,10 @@ ViewData["Title"] = "Login";
     </div>
 </div>
     
-@* @section Scripts {
+@section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-} *@
+}
+
 @* asp-controller="User" asp-action="index" *@

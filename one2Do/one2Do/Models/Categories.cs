@@ -1,34 +1,12 @@
-﻿using System;
-using System.ComponentModel;
-using System.Collections.Generic;
-namespace one2Do.Models;
+﻿using System.ComponentModel.DataAnnotations;
 
-public class Categories
+namespace one2Do.Models
 {
-public int Id { get; set; }
-public string[] ListType = new string[]
-{
-    "household",
-    "errands",
-    "professional",
-    "personal"
-};
-
-public Categories(int id, string[] listType)
-{
-    Id = id;
-    ListType = listType;
-
+    public class Categories
+    {
+        [Key]
+        public int Id { get; set; }
+        public string? Name { get; set; } // Now each category has a Name
+        public List<ListTemplateCategory> ListTemplateCategories { get; set; } = new List<ListTemplateCategory>();
+    }
 }
-    
-
-public Categories()
-{
-
-}
-
-}
-
-
-
-

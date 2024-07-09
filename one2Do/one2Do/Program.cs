@@ -29,7 +29,8 @@ builder.Services.AddIdentity<User, IdentityRole>(
         options.Password.RequireNonAlphanumeric = false;
     })
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<one2doDbContext>().AddDefaultTokenProviders();
+    .AddEntityFrameworkStores<one2doDbContext>().AddDefaultTokenProviders().AddDefaultUI();
+
 
 var app = builder.Build();
 

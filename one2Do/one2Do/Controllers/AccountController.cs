@@ -37,10 +37,10 @@ public class AccountController : Controller
     {
             if (ModelState.IsValid)
             {
-                var user = await userManager.FindByNameAsync(model.Username);
+                var user = await userManager.FindByNameAsync(model.Email);
                 if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
                 {
-                    var signInResult = await signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
+                    var signInResult = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
                     if (signInResult.Succeeded)
                     {
                         // Increment streak points on every login
@@ -82,7 +82,8 @@ public class AccountController : Controller
         {
             User user = new()
             {
-                Name = model.Name,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
                 UserName = model.Email,
                 Email = model.Email
             };
@@ -97,7 +98,7 @@ public class AccountController : Controller
             }
                 await signInManager.SignInAsync(user, false);
                 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "User");
 
             }
             foreach (var error in result.Errors)

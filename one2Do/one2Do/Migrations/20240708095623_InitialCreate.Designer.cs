@@ -3,7 +3,9 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using one2Do;
 using one2Do.Data;
 
 #nullable disable
@@ -11,9 +13,11 @@ using one2Do.Data;
 namespace one2Do.Migrations
 {
     [DbContext(typeof(one2doDbContext))]
-    partial class one2doDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240708095623_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -162,10 +166,12 @@ namespace one2Do.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext");
+                    b.Property<int?>("ListTemplateId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ListTemplateId");
 
                     b.ToTable("Categories");
                 });
@@ -184,21 +190,6 @@ namespace one2Do.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ListTemplates");
-                });
-
-            modelBuilder.Entity("one2Do.Models.ListTemplateCategory", b =>
-                {
-                    b.Property<int>("ListTemplateId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoriesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ListTemplateId", "CategoriesId");
-
-                    b.HasIndex("CategoriesId");
-
-                    b.ToTable("ListTemplateCategories");
                 });
 
             modelBuilder.Entity("one2Do.Models.QuoteModels.Quote", b =>
@@ -260,14 +251,7 @@ namespace one2Do.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -295,24 +279,19 @@ namespace one2Do.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
                     b.Property<DateTime?>("LastLoginDate")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -407,23 +386,11 @@ namespace one2Do.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("one2Do.Models.ListTemplateCategory", b =>
+            modelBuilder.Entity("one2Do.Models.Categories", b =>
                 {
-                    b.HasOne("one2Do.Models.Categories", "Categories")
-                        .WithMany("ListTemplateCategories")
-                        .HasForeignKey("CategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("one2Do.Models.ListTemplate", "ListTemplate")
-                        .WithMany("ListTemplateCategories")
-                        .HasForeignKey("ListTemplateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Categories");
-
-                    b.Navigation("ListTemplate");
+                    b.HasOne("one2Do.Models.ListTemplate", null)
+                        .WithMany("Categories")
+                        .HasForeignKey("ListTemplateId");
                 });
 
             modelBuilder.Entity("one2Do.Models.ToDoModels.TaskItem", b =>
@@ -441,14 +408,9 @@ namespace one2Do.Migrations
                     b.Navigation("ToDoList");
                 });
 
-            modelBuilder.Entity("one2Do.Models.Categories", b =>
-                {
-                    b.Navigation("ListTemplateCategories");
-                });
-
             modelBuilder.Entity("one2Do.Models.ListTemplate", b =>
                 {
-                    b.Navigation("ListTemplateCategories");
+                    b.Navigation("Categories");
 
                     b.Navigation("TaskItems");
                 });

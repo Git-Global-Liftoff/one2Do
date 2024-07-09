@@ -1,10 +1,10 @@
-
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using one2Do.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+
 
 using one2Do.Models;
 
@@ -55,9 +55,10 @@ namespace one2Do.Controllers
         {
             var lists = _context.ListTemplates
                 .Include(lt => lt.TaskItems)
-                .Include(lt => lt.Categories)
-                .AsEnumerable() //helped solve the exception error on search results page 
-                .Where(lt => lt.Categories != null && lt.Categories.Any(c => c.ListType.Contains(category)))
+                .Include(lt => lt.ListTemplateCategories) // Include the join entity
+                .ThenInclude(ltc => ltc.Categories) // Then include Categories from the join entity
+                .Where(lt => lt.ListTemplateCategories != null && 
+                             lt.ListTemplateCategories.Any(ltc => ltc.Categories.Name.Equals(category, StringComparison.OrdinalIgnoreCase)))
                 .ToList();
 
             // Pass the search results to the view

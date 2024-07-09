@@ -1,0 +1,26 @@
+@model one2Do.WeatherModel.CityNamesModel
+
+@{
+    ViewData["Title"] = "City Names";
+}
+
+<div class="container">
+    <h2>Forecast For Selected Cities</h2>
+    @foreach (var cityName in Model.CityNames)
+    {
+        <div class="form-group col-md-offset-3 col-md-5">
+            <label>City Name</label>
+            <span class="badge alert-primary">@cityName</span> <br />
+        </div>
+    }
+
+    <form method="get">
+        <button asp-controller="Weather" asp-action="SearchByCity" class="btn btn-primary">Go Back to City Search</button>
+    </form>
+</div>
+
+<div>
+    <form method="get">
+        <button asp-controller="user" asp-action="index" class="btn btn-primary">Go Back to Profile</button>
+    </form>
+</div>

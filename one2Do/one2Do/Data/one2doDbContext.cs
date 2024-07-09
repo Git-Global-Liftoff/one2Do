@@ -22,6 +22,7 @@ namespace one2Do
         public DbSet<ListTemplate> ListTemplates { get; set; }  // Add DbSet for ListTemplate
 
         public DbSet<City> Cities { get; set; }
+        public DbSet<City> MultipleCities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

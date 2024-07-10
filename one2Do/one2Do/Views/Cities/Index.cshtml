@@ -28,6 +28,24 @@
     <div class="row">
         @foreach (var city in Model)
         {
+            string temperatureMessage;
+            if (city.Temperature < 32)
+            {
+                temperatureMessage = "It's freezing! Stay warm!";
+            }
+            else if (city.Temperature < 60)
+            {
+                temperatureMessage = "It's a bit chilly. You might need a jacket.";
+            }
+            else if (city.Temperature < 80)
+            {
+                temperatureMessage = "The weather is quite pleasant.";
+            }
+            else
+            {
+                temperatureMessage = "It's hot outside! Stay cool and hydrated.";
+            }
+
             <div class="col-md-4 mb-3">
                 <div class="card">
                     <div class="card-body">
@@ -56,6 +74,8 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <!-- Display the temperature message -->
+                        <p class="mt-3">@temperatureMessage</p>
                         <form asp-action="RemoveCity" method="post" onsubmit="return confirm('Are you sure you want to remove this city?');">
                             <input type="hidden" name="cityName" value="@city.Name" />
                             <button type="submit" class="btn btn-danger btn-sm">Remove</button>
@@ -72,8 +92,9 @@
             <div class="col-md-12 text-center">
                 <p>No cities added yet.</p>
             </div>
-        </div>
+        }
     }
+    
 
     <div class="row mt-3">
         <div class="col-md-6 mx-auto text-center">
@@ -81,3 +102,4 @@
         </div>
     </div>
 </div>
+}

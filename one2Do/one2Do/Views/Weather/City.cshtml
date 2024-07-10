@@ -6,19 +6,38 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4 mb-3">
+        <div class="col-md-4 mb-3 mx-auto"> <!-- Centering the card -->
             <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">@Model.Name</h5>
-                    <p class="card-text">Temperature: <span class="badge alert-primary"style="font-size: medium;">@Model.Temperature°F</span></p>
-                    <p class="card-text">Humidity: <span class="badge alert-primary"style="font-size: medium;">@Model.Humidity</span></p>
-                    <p class="card-text">Pressure: <span class="badge alert-primary"style="font-size: medium;">@Model.Pressure</span></p>
-                    <p class="card-text">Wind Speed: <span class="badge alert-primary"style="font-size: medium;">@Model.Wind</span></p>
-                    <p class="card-text">Weather: <span class="badge alert-primary"style="font-size: medium;">@Model.Weather</span></p>
+                <div class="card-body text-center"> <!-- Centering the card content -->
+                    <h3 class="card-title" style="font-size: larger;">@Model.Name</h3> <!-- Larger font size for title -->
+                    <table class="table table-bordered"> <!-- Adding borders to the table -->
+                        <tbody>
+                            <tr>
+                                <th scope="row">Temperature</th>
+                                <td><span class="badge alert-primary">@Model.Temperature °F</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Humidity</th>
+                                <td><span class="badge alert-primary">@Model.Humidity %</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Pressure</th>
+                                <td><span class="badge alert-primary">@Model.Pressure hPa</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Wind Speed</th>
+                                <td><span class="badge alert-primary">@Model.Wind mph</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Weather</th>
+                                <td><span class="badge alert-primary">@Model.Weather</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-3 mx-auto text-center"> <!-- Centering the button -->
                     <form method="get">
-                        <button asp-controller="Weather" asp-action="SearchByCity" class="btn btn-danger">Another City</button>
+                        <button asp-controller="Weather" asp-action="SearchByCity" class="btn btn-danger btn-sm">Search</button>
                     </form>
                 </div>
             </div>
@@ -26,10 +45,9 @@
     </div>
 </div>
 
-
 <div class="container">
     <div class="row">
-        <div class="col-md-6 mb-3">
+        <div class="col-md-6 mb-3 mx-auto text-center"> <!-- Centering the button -->
             <form method="get">
                 <button asp-controller="User" asp-action="Index" class="btn btn-primary btn-lg btn-block">Back To Home</button>
             </form>

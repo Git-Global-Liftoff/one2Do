@@ -19,7 +19,7 @@ namespace one2Do.ViewModels
 
         [Required]
         [Display(Name = "Due Date")]
-        public DateTime DueDate { get; set; }
+        public DateTime DueDate { get; set; } = DateTime.Now;
 
         [Display(Name = "Completed")]
         public bool IsCompleted { get; set; }

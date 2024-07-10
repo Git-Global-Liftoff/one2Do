@@ -1,6 +1,6 @@
 @model one2Do.ViewModels.AddToDoListViewModel
 
-<form asp-action="Create" method="post">
+<form asp-action="Create" asp-controller="ToDoList" method="post">
     <div class="form-group">
         <label asp-for="Title"></label>
         <input asp-for="Title" class="form-control" />
@@ -9,7 +9,7 @@
 
     <div class="form-group">
         <label asp-for="Description"></label>
-        <textarea asp-for="Description" class="form-control"></textarea>
+        <input asp-for="Description" class="form-control" />
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
 
@@ -19,9 +19,9 @@
         <span asp-validation-for="DueDate" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="IsCompleted"></label>
-        <input asp-for="IsCompleted" type="checkbox" class="form-check-input" />
+    <div class="form-group form-check">
+        <input asp-for="IsCompleted" type="checkbox" class="form-check-input" id="IsCompleted">
+        <label class="form-check-label" asp-for="IsCompleted"></label>
         <span asp-validation-for="IsCompleted" class="text-danger"></span>
     </div>
 

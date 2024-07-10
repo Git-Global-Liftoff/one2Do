@@ -12,13 +12,19 @@
         </form>
     </p>
     <p>
-        <button asp-controller="ProfessionalToDoList" asp-action="create" class="btn btn-primary">Professional ToDo List </button>
+        <form asp-controller="ProfessionalToDoList" asp-action="Create" method="post">
+            <input type="submit" value="Professional ToDo List" class="btn btn-primary"/>
+        </form>
     </p>
     <p>
-        <button asp-controller="PersonalToDoList" asp-action="create" class="btn btn-primary">Personal ToDo List </button>
+        <form asp-controller="PersonalToDoList" asp-action="Create" method="post">
+            <input type="submit" value="Personal ToDo List" class="btn btn-primary"/>
+        </form>
     </p>
     <p>
-        <button asp-controller="ErrandsToDoList" asp-action="create" class="btn btn-primary">Errands ToDo List </button>
+        <form asp-controller="ErrandsToDoList" asp-action="Create" method="post">
+            <input type="submit" value="Errands ToDo List" class="btn btn-primary"/>
+        </form>
     </p>
 </div>
  <form method = "get">

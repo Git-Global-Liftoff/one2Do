@@ -1,0 +1,44 @@
+@model List<one2Do.WeatherModel.City>
+
+@{
+    ViewData["Title"] = "Manage Cities";
+}
+
+<h2>Manage Cities</h2>
+
+<!-- Form to add a new city -->
+<form asp-action="AddCity" method="post" class="mb-3">
+    <div class="input-group">
+        <input type="text" id="cityName" name="cityName" class="form-control" placeholder="Enter city name" required />
+        <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+</form>
+
+<div class="row">
+    @foreach (var city in Model)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@city.Name</h5>
+                    <p class="card-text">Temperature: <span class="badge alert-primary"style="font-size: medium;">@city.Temperature °F</p>
+                    <p class="card-text">Humidity: <span class="badge alert-primary"style="font-size: medium;">@city.Humidity %</p>
+                    <p class="card-text">Pressure: <span class="badge alert-primary"style="font-size: medium;">@city.Pressure %</p>
+                    <p class="card-text">Wind Speed: <span class="badge alert-primary"style="font-size: medium;">@city.Wind m/s</p>
+                    <p class="card-text">Weather: <span class="badge alert-primary"style="font-size: medium;">@city.Weather</p>
+                    <form asp-action="RemoveCity" method="post" onsubmit="return confirm('Are you sure you want to remove this city?');">
+                        <input type="hidden" name="cityName" value="@city.Name" />
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (Model.Count == 0)
+{
+    <p>No cities added yet.</p>
+}
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-3">Back to Home</a>

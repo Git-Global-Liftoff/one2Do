@@ -1,6 +1,9 @@
 @model one2Do.ViewModels.ToDoListViewModel
 
 <h2>ToDo List</h2>
+<div>
+    <p>@Model.CompletedTasks of @Model.TotalTasks tasks completed!</p>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -24,3 +27,11 @@
     }
     </tbody>
 </table>
+<hr>
+<form method = "get">
+                <button asp-controller="user" asp-action="index" class="btn btn-primary"> Back to Profile</button>
+            </form>   
+<br>
+    <form method = "get">
+                <button asp-controller="ToDoList" asp-action="Create" class="btn btn-primary"> Back to Create</button>
+            </form>  

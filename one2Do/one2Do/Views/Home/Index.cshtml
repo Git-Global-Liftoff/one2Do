@@ -3,7 +3,9 @@
 }
 
 <div class="text-center">
-    <h1> <img src="~/images/logo.png" alt="one2Do Logo" style="height: 150px; width: auto/> </h1>
+    <h1>
+         <img src="~/images/logo.png" alt="one2Do Logo" style="height: 150px; width: auto"/> 
+    </h1>
 
     <h3>Get it one2Done!</h3>
      <div class="container">
@@ -19,5 +21,14 @@
     <form method="get">
         <button asp-controller="Account" asp-action="Login" class="btn btn-primary">Login</button>
     </form>
+     @if (User.Identity.IsAuthenticated)
+                        {
+                            <br>
+                        <p>Already logged in?</p>
+                        <form method="get">
+                        <button asp-controller="User" asp-action ="Index" class="btn btn-primary">Go to Profile</button>
+                        </form>
+                        }
     
+</div>
 </div>

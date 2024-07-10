@@ -41,11 +41,12 @@ namespace one2Do.Controllers
                     DueDate = viewModel.DueDate,
                     IsCompleted = viewModel.IsCompleted,
                     CategoryId = viewModel.CategoryId,
-                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier) 
+                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
                 };
 
                 _context.Add(toDoList);
                 await _context.SaveChangesAsync();
+                //return Redirect("/");
                 return RedirectToAction(nameof(Index));
             }
             viewModel.Categories = new SelectList(_context.Categories, "Id", "Name", viewModel.CategoryId);
@@ -61,15 +62,17 @@ namespace one2Do.Controllers
                 .Where(t => t.UserId == userId)
                 .ToListAsync();
 
-            var viewModel = toDoLists.Select(t => new ToDoListViewModel
+            var viewModel = new ToDoListViewModel
             {
-                Id = t.Id,
-                Title = t.Title,
-                Description = t.Description,
-                DueDate = t.DueDate,
-                IsCompleted = t.IsCompleted,
-                CategoryName = t.Category.Name
-            }).ToList();
+                ToDoItems = toDoLists.Select(t => new ToDoListItemViewModel
+                {
+                    Title = t.Title,
+                    Description = t.Description,
+                    DueDate = t.DueDate,
+                    IsCompleted = t.IsCompleted,
+                    CategoryName = t.Category?.Name ?? "No Category"
+                }).ToList()
+            };
 
             return View(viewModel);
         }

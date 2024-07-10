@@ -3,12 +3,21 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">one2Do</h1>
+    <h1> <img src="~/images/logo.png" alt="one2Do Logo" style="height: 150px; width: auto/> </h1>
+
     <h3>Get it one2Done!</h3>
      <div class="container">
         <p>Make it personal</p>
         <p>with customized to-do lists and plan around your local weather.</p>
         <p>Get it <strong>one2Done</strong> the easier way!</p>
-        <a href="#" class="btn">Get Started</a>
+        <br>
+        <p>Get started!</p>
+        <form method="get">
+        <button asp-controller="Account" asp-action="Register" class="btn btn-primary">Create an Account</button>
+    </form>
+    <br>
+    <form method="get">
+        <button asp-controller="Account" asp-action="Login" class="btn btn-primary">Login</button>
+    </form>
     
 </div>

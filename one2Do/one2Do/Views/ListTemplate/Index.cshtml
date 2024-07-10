@@ -7,7 +7,18 @@
 <h1> Welcome to your list </h1>
 <div>
     <p>
-        This is a list
+        <form asp-controller="HouseholdToDoList" asp-action="create" method="post">
+            <input type="submit" value="Household ToDo List" class="btn btn-primary"/>
+        </form>
+    </p>
+    <p>
+        <button asp-controller="ProfessionalToDoList" asp-action="create" class="btn btn-primary">Professional ToDo List </button>
+    </p>
+    <p>
+        <button asp-controller="PersonalToDoList" asp-action="create" class="btn btn-primary">Personal ToDo List </button>
+    </p>
+    <p>
+        <button asp-controller="ErrandsToDoList" asp-action="create" class="btn btn-primary">Errands ToDo List </button>
     </p>
 </div>
  <form method = "get">

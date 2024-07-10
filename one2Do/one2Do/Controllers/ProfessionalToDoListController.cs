@@ -14,9 +14,9 @@ namespace one2Do;
 
     public class ProfessionalToDoController : Controller
     {
-        // Define household items as properties
+        // Define professional items as properties....don't need to do, any longer, actually?
        private readonly one2doDbContext _context;
-        private readonly string[] HouseholdItems = { "Laundry", "Organize Closets", "Iron", "Dishes", "Wash Baseboards", "Dust", "Change Linens" }; //change to professional tasks
+        private readonly string[] ProfessionalTasks = { "Conduct Interview", "Organize Files", "Review Resume", "Meet with Board", "Professional Development Course", "Play Golf", "Finalize Building Plans" }; 
 
         public ProfessionalToDoController(one2doDbContext context) 
         {
@@ -51,7 +51,7 @@ namespace one2Do;
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // More reliable way to get user ID
                 var newToDoList = new ToDoList
                 {
-                    Title = "Household ToDo Template",
+                    Title = "Professional ToDo Template",
                     UserId = userId,
                     CategoryId = 1 // Store only the CategoryId
                 };

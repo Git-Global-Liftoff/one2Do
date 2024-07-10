@@ -12,13 +12,13 @@ namespace one2Do;
 
     [Authorize] 
 
-    public class HouseholdToDoController : Controller
+    public class PersonalToDoController : Controller
     {
-        // Define household items as properties
+        // Define professional items as properties....don't need to do, any longer, actually?
        private readonly one2doDbContext _context;
-        private readonly string[] HouseholdItems = { "Laundry", "Organize Closets", "Iron", "Dishes", "Wash Baseboards", "Dust", "Change Linens" };
+        private readonly string[] PersonalTasks = { "Manicure", "Lunch with Caroline", "Research Therapists", "Eat Lots of Ice Cream", "Oil Pulling", "Test New Smoothie Recipe", "Solo Dance Party" }; 
 
-        public HouseholdToDoController(one2doDbContext context) 
+        public PersonalToDoController(one2doDbContext context) 
         {
             _context = context;
         }
@@ -44,43 +44,23 @@ namespace one2Do;
         // POST: HouseholdToDoList/Create
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
         
-            var theCategory = _context.Categories.Find(1);
+            {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // More reliable way to get user ID
-                // var newToDoList = new ToDoList
-                // {
-                //     Title = "Household ToDo Template",
-                //     UserId = userId,
-                //     CategoryId = 1 // Store only the CategoryId
-                // };
-                var newToDoList = new ToDoList(
-                    "Household ToDo Template",
-                    userId,
-                    1,
-                    theCategory,
-                    "To do around the house",
-                    DateTime.Now, 
-                    false
-
-                );
+                var newToDoList = new ToDoList
+                {
+                    Title = "Personal ToDo Template",
+                    UserId = userId,
+                    CategoryId = 1 // Store only the CategoryId
+                };
 
                 _context.Add(newToDoList);
-                 _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(Index));
                 return Redirect("/");
-            
+            }
            
         }
-
     }
-// {
-//             Title = title;
-//             UserId = userId;
-//             CategoryId = categoryId;
-//             Category = category;
-//             Description = description;
-//             DueDate = dueDate;
-//             IsCompleted = isCompleted;
-//         }

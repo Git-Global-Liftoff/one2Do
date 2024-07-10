@@ -1,0 +1,26 @@
+@model one2Do.ViewModels.ToDoListViewModel
+
+<h2>ToDo List</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Task Item</th>
+            <th>Due Date</th>
+            <th>Completed</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.ToDoItems)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.Description</td> <!-- Changed the column header label, not the variable name -->
+            <td>@item.DueDate.ToShortDateString()</td>
+            <td>@item.IsCompleted</td>
+            <td>@item.CategoryName</td>
+        </tr>
+    }
+    </tbody>
+</table>

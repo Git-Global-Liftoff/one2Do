@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace one2Do.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -40,7 +40,9 @@ namespace one2Do.Migrations
                 {
                     Id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
+                    FirstName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     StreakPoints = table.Column<int>(type: "int", nullable: false),
                     LastLoginDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
@@ -74,6 +76,21 @@ namespace one2Do.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "ListTemplates",
                 columns: table => new
                 {
@@ -100,21 +117,6 @@ namespace one2Do.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Quotes", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "ToDoLists",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ToDoLists", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -246,21 +248,55 @@ namespace one2Do.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Categories",
+                name: "ToDoLists",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ListTemplateId = table.Column<int>(type: "int", nullable: true)
+                    Title = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DueDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    IsCompleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.PrimaryKey("PK_ToDoLists", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Categories_ListTemplates_ListTemplateId",
+                        name: "FK_ToDoLists_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "ListTemplateCategories",
+                columns: table => new
+                {
+                    ListTemplateId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ListTemplateCategories", x => new { x.ListTemplateId, x.CategoryId });
+                    table.ForeignKey(
+                        name: "FK_ListTemplateCategories_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ListTemplateCategories_ListTemplates_ListTemplateId",
                         column: x => x.ListTemplateId,
                         principalTable: "ListTemplates",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -270,10 +306,10 @@ namespace one2Do.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Description = table.Column<string>(type: "longtext", nullable: false)
+                    Description = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    DueDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     IsCompleted = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    DueDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ToDoListId = table.Column<int>(type: "int", nullable: false),
                     ListTemplateId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -287,6 +323,32 @@ namespace one2Do.Migrations
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TaskItems_ToDoLists_ToDoListId",
+                        column: x => x.ToDoListId,
+                        principalTable: "ToDoLists",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "ToDoListCategories",
+                columns: table => new
+                {
+                    ToDoListId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    ToDoListCategoryId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ToDoListCategories", x => new { x.ToDoListId, x.CategoryId });
+                    table.ForeignKey(
+                        name: "FK_ToDoListCategories_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ToDoListCategories_ToDoLists_ToDoListId",
                         column: x => x.ToDoListId,
                         principalTable: "ToDoLists",
                         principalColumn: "Id",
@@ -332,9 +394,9 @@ namespace one2Do.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Categories_ListTemplateId",
-                table: "Categories",
-                column: "ListTemplateId");
+                name: "IX_ListTemplateCategories_CategoryId",
+                table: "ListTemplateCategories",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TaskItems_ListTemplateId",
@@ -345,6 +407,21 @@ namespace one2Do.Migrations
                 name: "IX_TaskItems_ToDoListId",
                 table: "TaskItems",
                 column: "ToDoListId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ToDoListCategories_CategoryId",
+                table: "ToDoListCategories",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ToDoLists_CategoryId",
+                table: "ToDoLists",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ToDoLists_UserId",
+                table: "ToDoLists",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -366,13 +443,16 @@ namespace one2Do.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "ListTemplateCategories");
 
             migrationBuilder.DropTable(
                 name: "Quotes");
 
             migrationBuilder.DropTable(
                 name: "TaskItems");
+
+            migrationBuilder.DropTable(
+                name: "ToDoListCategories");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -385,6 +465,9 @@ namespace one2Do.Migrations
 
             migrationBuilder.DropTable(
                 name: "ToDoLists");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

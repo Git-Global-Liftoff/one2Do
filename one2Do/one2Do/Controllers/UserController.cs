@@ -56,9 +56,9 @@ namespace one2Do.Controllers
             var lists = _context.ListTemplates
                 .Include(lt => lt.TaskItems)
                 .Include(lt => lt.ListTemplateCategories) // Include the join entity
-                .ThenInclude(ltc => ltc.Categories) // Then include Categories from the join entity
+                .ThenInclude(ltc => ltc.Category) // Then include Categories from the join entity
                 .Where(lt => lt.ListTemplateCategories != null && 
-                             lt.ListTemplateCategories.Any(ltc => ltc.Categories.Name.Equals(category, StringComparison.OrdinalIgnoreCase)))
+                             lt.ListTemplateCategories.Any(ltc => ltc.Category.Name.Equals(category, StringComparison.OrdinalIgnoreCase)))
                 .ToList();
 
             // Pass the search results to the view

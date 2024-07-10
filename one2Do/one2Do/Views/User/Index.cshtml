@@ -6,12 +6,10 @@
 }
 
 <div class="text-center">
-
     <h1 class="display-4">@Model.FirstName @Model.LastName's Profile</h1>
-
     @if (User.IsInRole("Premium"))
     {
-    <p>Streak Points: @Model.StreakPoints</p>
+        <p>Streak Points: @Model.StreakPoints</p>
     }
 </div>
 
@@ -23,11 +21,11 @@
     </form>
 
     <form method="get">
-        <button asp-controller="ChooseTemplate" asp-action="Index" class="btn btn-primary">View Generic Templates</button>
+        <button asp-controller="ToDoList" asp-action="Index" class="btn btn-primary">Your Lists</button>
     </form>
 
     <form method="get">
-        <button asp-controller="User" asp-action="Todo" class="btn btn-primary">Your Lists</button>
+        <button asp-controller="ChooseTemplate" asp-action="Index" class="btn btn-primary">View Generic Templates</button>
     </form>
 
     <form method="get">

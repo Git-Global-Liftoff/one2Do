@@ -46,7 +46,6 @@ namespace one2Do.Controllers
 
                 _context.Add(toDoList);
                 await _context.SaveChangesAsync();
-                //return Redirect("/");
                 return RedirectToAction(nameof(Index));
             }
             viewModel.Categories = new SelectList(_context.Categories, "Id", "Name", viewModel.CategoryId);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -11,16 +12,29 @@ namespace one2Do.Models.ToDoModels
         [Display(Name = "List Title")]
         public string Title { get; set; }
 
-        [Required] // Assuming every list must be linked to a user
-        public string UserId { get; set; } // ID of the user who owns the list
+        public string UserId { get; set; }
 
-        [Required] // Ensures a category is always selected
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
-        public List<ToDoListCategory> ToDoListCategories { get; set; }
+        [Required]
+        [Display(Name = "Task Description")]
+        public string Description { get; set; }
 
-        public List<TaskItem> Tasks { get; set; } = new List<TaskItem>(); // Initialization moved here for consistency
+        [DataType(DataType.Date)]
+        [Display(Name = "Due Date")]
+        public DateTime DueDate { get; set; }
+
+        [Display(Name = "Completed")]
+        public bool IsCompleted { get; set; }
+
+        public List<ToDoListCategory> ToDoListCategories { get; set; }
+        public List<TaskItem> Tasks { get; set; }
+
+        public ToDoList()
+        {
+            Tasks = new List<TaskItem>();
+        }
     }
 }

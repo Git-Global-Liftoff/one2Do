@@ -1,30 +1,43 @@
+using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
-using one2Do.Models.ToDoModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using one2Do.Models;
+using one2Do.Models.ToDoModels;
 
 namespace one2Do.ViewModels
 {
     public class AddToDoListViewModel
     {
-        [Required(ErrorMessage = "Please enter a title for the to-do list.")]
-        [MinLength(3, ErrorMessage = "The title must be at least 3 characters long.")]
+        [Required]
+        [Display(Name = "Title")]
         public string Title { get; set; }
 
+        [Required]
+        [Display(Name = "Description")]
+        public string Description { get; set; }
+
+        [Required]
+        [Display(Name = "Due Date")]
+        public DateTime DueDate { get; set; }
+
+        [Display(Name = "Completed")]
+        public bool IsCompleted { get; set; }
+
+        [Required]
         [Display(Name = "Category")]
-        public int CategoryId { get; set; }  
+        public int CategoryId { get; set; }
 
         public SelectList Categories { get; set; }
 
         public AddToDoListViewModel(IEnumerable<Category> categories)
         {
-            Categories = new SelectList(categories ?? new List<Category>(), "Id", "Name", "Select a Category");
+            Categories = new SelectList(categories, "Id", "Name");
         }
 
         public AddToDoListViewModel() 
         {
-            Categories = new SelectList(new List<Category>());
+            Categories = new SelectList(Array.Empty<Category>(), "Id", "Name");
         }
     }
 }

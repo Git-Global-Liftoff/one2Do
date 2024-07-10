@@ -37,7 +37,7 @@ namespace one2Do.Controllers
                 var toDoList = new ToDoList
                 {
                     Title = viewModel.Title,
-                    Description = viewModel.Description, // Ensure Description is set
+                    Description = viewModel.Description,
                     DueDate = viewModel.DueDate,
                     IsCompleted = viewModel.IsCompleted,
                     CategoryId = viewModel.CategoryId,
@@ -46,10 +46,31 @@ namespace one2Do.Controllers
 
                 _context.Add(toDoList);
                 await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
-                return Redirect("/");
+                return RedirectToAction(nameof(Index));
             }
             viewModel.Categories = new SelectList(_context.Categories, "Id", "Name", viewModel.CategoryId);
+            return View(viewModel);
+        }
+
+        // GET: ToDoList/Index
+        public async Task<IActionResult> Index()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var toDoLists = await _context.ToDoLists
+                .Include(t => t.Category)
+                .Where(t => t.UserId == userId)
+                .ToListAsync();
+
+            var viewModel = toDoLists.Select(t => new ToDoListViewModel
+            {
+                Id = t.Id,
+                Title = t.Title,
+                Description = t.Description,
+                DueDate = t.DueDate,
+                IsCompleted = t.IsCompleted,
+                CategoryName = t.Category.Name
+            }).ToList();
+
             return View(viewModel);
         }
     }

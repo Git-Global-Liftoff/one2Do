@@ -1,0 +1,26 @@
+@model IEnumerable<one2Do.ViewModels.ToDoListViewModel>
+
+<h2>ToDo List</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Due Date</th>
+            <th>Completed</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>@item.DueDate.ToShortDateString()</td>
+                <td>@item.IsCompleted</td>
+                <td>@item.CategoryName</td>
+            </tr>
+        }
+    </tbody>
+</table>

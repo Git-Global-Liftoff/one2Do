@@ -1,25 +1,24 @@
-@model one2Do.Models.ToDoModels.AddToDoListViewModel
+@model one2Do.ViewModels.AddToDoListViewModel
 
-<h2>Create New ToDo List</h2>
-
-<form asp-controller="ToDoList" asp-action="Create" method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form asp-action="Create">
     <div class="form-group">
-        <label asp-for="Title" class="control-label"></label>
+        <label asp-for="Title"></label>
         <input asp-for="Title" class="form-control" />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
-
     <div class="form-group">
-        <label asp-for="CategoryId" class="control-label"></label>
-        <select asp-for="CategoryId" asp-items="@Model.Categories" class="form-control">
-            <option value="">-- Select a category --</option>
-        </select>
+        @if (Model.Categories != null && Model.Categories.Any())
+        {
+            <label asp-for="CategoryId">Category</label>
+            <select asp-for="CategoryId" class="form-control" asp-items="Model.Categories">
+                <option value="">Please select</option>
+            </select>
+        }
+        else
+        {
+            <p>No categories available. Please add some categories first.</p>
+        }
         <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
-
-    <div class="form-group">
-        @* @Html.AntiForgeryToken() *@
-        <input type="submit" value="Create" class="btn btn-primary" />
-    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
 </form>

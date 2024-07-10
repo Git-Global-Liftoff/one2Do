@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using one2Do.Models;
+using one2Do.Models.ToDoModels;
 using one2Do.Models.QuoteModels;
 using System;
 using System.Linq;
@@ -62,15 +63,15 @@ namespace one2Do.Data
                 // Seed Categories if they are not already in the database
                 if (!context.Categories.Any())
                 {
-                    var categories = new Categories[]
+                    var categories = new Category[]
                     {
-                        new Categories { Name = "Household" },
-                        new Categories { Name = "Errands" },
-                        new Categories { Name = "Professional" },
-                        new Categories { Name = "Personal" }
+                        new Category { Name = "Household" },
+                        new Category { Name = "Errands" },
+                        new Category { Name = "Professional" },
+                        new Category { Name = "Personal" }
                     };
 
-                    foreach (Categories c in categories)
+                    foreach (Category c in categories)
                     {
                         context.Categories.Add(c);
                     }

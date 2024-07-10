@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using one2Do.Data;
 using one2Do.Models.ToDoModels;
+using one2Do.ViewModels;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -23,52 +24,46 @@ namespace one2Do.Controllers
         // GET: ToDoList
         public async Task<IActionResult> Index()
         {
-            // Fetch ToDoLists from the database
-            var toDoLists = await _context.ToDoLists.ToListAsync();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Ensure we are only showing ToDoLists for the logged-in user
+            var toDoLists = await _context.ToDoLists
+                .Include(t => t.Category) // Ensure the category data is loaded
+                .Where(t => t.UserId == userId)
+                .ToListAsync();
             return View(toDoLists);
         }
 
         // GET: ToDoList/Create
         public IActionResult Create()
         {
-            var viewModel = new AddToDoListViewModel
-            {
-                Categories = _context.Categories.Select(c => new SelectListItem 
-                { 
-                    Value = c.Id.ToString(), 
-                    Text = c.Name 
-                }).ToList()
-            };
+            var categories = _context.Categories.ToList();
+            var viewModel = new AddToDoListViewModel(categories);
             return View(viewModel);
         }
 
         // POST: ToDoList/Create
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AddToDoListViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // More reliable way to get user ID
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Fetch the user ID from the current user claim
                 var newToDoList = new ToDoList
                 {
                     Title = viewModel.Title,
                     UserId = userId,
-                    CategoryId = viewModel.CategoryId // Store only the CategoryId
+                    CategoryId = viewModel.CategoryId // Ensure this handles the nullable scenario
                 };
 
-                _context.Add(newToDoList);
+                _context.ToDoLists.Add(newToDoList);
                 await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
                 return Redirect("/");
             }
-            // Reload categories if model state is not valid or to display in case of failure
-            viewModel.Categories = _context.Categories.Select(c => new SelectListItem 
-            { 
-                Value = c.Id.ToString(), 
-                Text = c.Name 
-            }).ToList();  
+            // Reload categories if model state is not valid
+            viewModel.Categories = new SelectList(_context.Categories, "Id", "Name", viewModel.CategoryId);
             return View(viewModel);
         }
+
+        // Additional methods for Edit, Delete, Details etc. will be here
     }
 }

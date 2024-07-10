@@ -7,5 +7,7 @@ namespace one2Do.Models.ToDoModels
         public bool IsCompleted { get; set; }
         public DateTime DueDate { get; set; }
         public ToDoList ToDoList { get; set; }
+
+
     }
 }

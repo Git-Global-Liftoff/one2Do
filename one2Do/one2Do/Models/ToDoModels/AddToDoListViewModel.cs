@@ -10,5 +10,8 @@ namespace one2Do.Models.ToDoModels
         public string? Title { get; set; }
         public int CategoryId { get; set; }  
         public List<SelectListItem> Categories { get; set; } = new();
+       
     }
 }
+
+

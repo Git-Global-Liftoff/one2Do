@@ -50,7 +50,8 @@ public class WeatherController : Controller
         {
             viewModel.Name = weatherResponse.Name;
             viewModel.Temperature = weatherResponse.Main.Temp;
-            viewModel.Humidity = weatherResponse.Main.Pressure;
+            viewModel.Humidity = weatherResponse.Main.Humidity;
+            viewModel.Pressure = weatherResponse.Main.Pressure;
             viewModel.Weather = weatherResponse.Weather[0].Main;
             viewModel.Wind = weatherResponse.Wind.Speed;
         }

@@ -268,6 +268,9 @@ namespace one2Do.Migrations
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("longtext");

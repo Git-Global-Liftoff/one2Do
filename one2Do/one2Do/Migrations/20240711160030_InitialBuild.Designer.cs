@@ -12,8 +12,8 @@ using one2Do.Data;
 namespace one2Do.Migrations
 {
     [DbContext(typeof(one2doDbContext))]
-    [Migration("20240711090150_UpdateToDoListAndTasks")]
-    partial class UpdateToDoListAndTasks
+    [Migration("20240711160030_InitialBuild")]
+    partial class InitialBuild
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -234,8 +234,7 @@ namespace one2Do.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime?>("DueDate")
                         .HasColumnType("datetime(6)");
@@ -268,6 +267,12 @@ namespace one2Do.Migrations
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("DueDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Title")
                         .IsRequired()

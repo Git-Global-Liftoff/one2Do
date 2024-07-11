@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -37,9 +38,7 @@ namespace one2Do.Controllers
                 var toDoList = new ToDoList
                 {
                     Title = viewModel.Title,
-                    Description = viewModel.Description,
                     DueDate = viewModel.DueDate,
-                    IsCompleted = viewModel.IsCompleted,
                     CategoryId = viewModel.CategoryId,
                     UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
                 };
@@ -58,6 +57,7 @@ namespace one2Do.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var toDoLists = await _context.ToDoLists
                 .Include(t => t.Category)
+                .Include(t => t.TaskItems)
                 .Where(t => t.UserId == userId)
                 .ToListAsync();
 
@@ -65,10 +65,14 @@ namespace one2Do.Controllers
             {
                 ToDoItems = toDoLists.Select(t => new ToDoListItemViewModel
                 {
+                    ToDoListId = t.Id,
                     Title = t.Title,
-                    Description = t.Description,
-                    DueDate = t.DueDate,
-                    IsCompleted = t.IsCompleted,
+                    TaskItems = t.TaskItems.Select(task => new TaskItemViewModel
+                    {
+                        TaskDescription = task.Description,
+                        DueDate = task.DueDate ?? DateTime.Now,
+                        IsCompleted = task.IsCompleted
+                    }).ToList(),
                     CategoryName = t.Category?.Name ?? "No Category"
                 }).ToList()
             };

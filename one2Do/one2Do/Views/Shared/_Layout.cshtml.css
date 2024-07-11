@@ -13,8 +13,8 @@ a {
 
 .btn-primary {
   color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  background-color: #4d869c;
+  border-color: #468198;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -24,10 +24,10 @@ a {
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid #cde8e5;
 }
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #cde8e5;
 }
 
 .box-shadow {

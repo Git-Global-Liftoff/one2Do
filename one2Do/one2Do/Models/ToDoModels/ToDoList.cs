@@ -22,13 +22,32 @@ namespace one2Do.Models.ToDoModels
         [Display(Name = "Due Date")]
         public DateTime DueDate { get; set; }
 
-        public List<ToDoListCategory> ToDoListCategories { get; set; }
-        public List<TaskItem> TaskItems { get; set; }
+
+        [Display(Name = "Completed")]
+        public bool IsCompleted { get; set; }
+
+        public List<ToDoListCategory>? ToDoListCategories { get; set; }
+        public List<TaskItem> Tasks { get; set; }
+
+ 
+
 
         public ToDoList()
         {
             TaskItems = new List<TaskItem>();
             ToDoListCategories = new List<ToDoListCategory>();
+        }
+
+        public ToDoList(string title, string userId, int categoryId, Category category, string description, DateTime dueDate, bool isCompleted)
+        {
+            Title = title;
+            UserId = userId;
+            CategoryId = categoryId;
+            Category = category;
+            Description = description;
+            DueDate = dueDate;
+            IsCompleted = isCompleted;
+            Tasks = new List<TaskItem>();
         }
     }
 }

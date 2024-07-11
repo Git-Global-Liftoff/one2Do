@@ -22,5 +22,7 @@ namespace one2Do.Models.ToDoModels
         [Required]
         public int ToDoListId { get; set; }
         public ToDoList ToDoList { get; set; }
+
+
     }
 }

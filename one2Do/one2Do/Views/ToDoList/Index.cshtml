@@ -1,6 +1,8 @@
 @model one2Do.ViewModels.ToDoListViewModel
 
+
 <h2>ToDo Lists</h2>
+   <p>@Model.CompletedTasks of @Model.TotalTasks tasks completed!</p>
 
 @foreach (var list in Model.ToDoItems)
 {
@@ -36,3 +38,4 @@
         </div>
     </div>
 }
+

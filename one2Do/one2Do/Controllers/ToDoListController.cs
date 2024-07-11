@@ -74,7 +74,9 @@ namespace one2Do.Controllers
                         IsCompleted = task.IsCompleted
                     }).ToList(),
                     CategoryName = t.Category?.Name ?? "No Category"
-                }).ToList()
+                }).ToList(),
+                TotalTasks = toDoLists.Count,
+                CompletedTasks = toDoLists.Count(t => t.IsCompleted)
             };
 
             return View(viewModel);

@@ -53,7 +53,7 @@ public class ErrandsToDoListController : Controller
     public IActionResult Create()
     {
         
-        var theCategory = _context.Categories.Find(1);
+        var theCategory = _context.Categories.Find(2);
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // More reliable way to get user ID
         // var newToDoList = new ToDoList
         // {
@@ -64,7 +64,7 @@ public class ErrandsToDoListController : Controller
         var newToDoList = new ToDoList(
             "Errands ToDo Template",
             userId,
-            1,
+            2,
             theCategory,
             "To do around town",
             DateTime.Now,

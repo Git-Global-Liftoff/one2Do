@@ -50,7 +50,7 @@ public class HouseholdToDoListController : Controller
     // POST: HouseholdToDoList/Create
     [HttpPost]
     //[ValidateAntiForgeryToken]
-    public IActionResult Create()
+    public IActionResult Create() //may need to tweek here to fix category column on "to do list" index view
     {
         
         var theCategory = _context.Categories.Find(1);

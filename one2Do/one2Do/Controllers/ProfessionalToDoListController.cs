@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using one2Do.Controllers;
 using one2Do.Data;
+using one2Do.Models;
 using one2Do.Models.ToDoModels;
 
 namespace one2Do;
@@ -53,7 +54,7 @@ public class ProfessionalToDoListController : Controller
     public IActionResult Create()
     {
         
-        var theCategory = _context.Categories.Find(1);
+        var theCategory = _context.Categories.Find(3);
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // More reliable way to get user ID
         // var newToDoList = new ToDoList
         // {
@@ -64,7 +65,7 @@ public class ProfessionalToDoListController : Controller
         var newToDoList = new ToDoList(
             "Professional ToDo Template",
             userId,
-            1,
+            3,
             theCategory,
             "To do on the job",
             DateTime.Now,

@@ -8,9 +8,9 @@ namespace one2Do.ViewModels
 {
     public class AddTaskItemViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Task description is required.")]
         [Display(Name = "Task Description")]
-        public string Description { get; set; }
+        public string TaskDescription { get; set; } = string.Empty;
 
         [DataType(DataType.Date)]
         [Display(Name = "Due Date")]
@@ -28,6 +28,9 @@ namespace one2Do.ViewModels
             ToDoLists = new SelectList(toDoLists, "Id", "Title");
         }
 
-        public AddTaskItemViewModel() { }
+        public AddTaskItemViewModel()
+        {
+            ToDoLists = new SelectList(new List<ToDoList>());
+        }
     }
 }

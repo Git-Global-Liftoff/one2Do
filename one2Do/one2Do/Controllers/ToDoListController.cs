@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -37,20 +38,12 @@ namespace one2Do.Controllers
                 var toDoList = new ToDoList
                 {
                     Title = viewModel.Title,
+                    DueDate = viewModel.DueDate,
                     CategoryId = viewModel.CategoryId,
                     UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
                 };
 
-                var taskItem = new TaskItem
-                {
-                    Description = viewModel.Description,
-                    DueDate = viewModel.DueDate,
-                    IsCompleted = viewModel.IsCompleted,
-                    ToDoList = toDoList
-                };
-
                 _context.Add(toDoList);
-                _context.Add(taskItem);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -64,7 +57,7 @@ namespace one2Do.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var toDoLists = await _context.ToDoLists
                 .Include(t => t.Category)
-                .Include(t => t.TaskItems) // Include TaskItems
+                .Include(t => t.TaskItems)
                 .Where(t => t.UserId == userId)
                 .ToListAsync();
 
@@ -72,10 +65,14 @@ namespace one2Do.Controllers
             {
                 ToDoItems = toDoLists.Select(t => new ToDoListItemViewModel
                 {
+                    ToDoListId = t.Id,
                     Title = t.Title,
-                    Description = t.TaskItems.FirstOrDefault()?.Description ?? "No Tasks", // Use TaskItems
-                    DueDate = t.TaskItems.FirstOrDefault()?.DueDate, // Use TaskItems
-                    IsCompleted = t.TaskItems.FirstOrDefault()?.IsCompleted ?? false, // Use TaskItems
+                    TaskItems = t.TaskItems.Select(task => new TaskItemViewModel
+                    {
+                        TaskDescription = task.Description,
+                        DueDate = task.DueDate ?? DateTime.Now,
+                        IsCompleted = task.IsCompleted
+                    }).ToList(),
                     CategoryName = t.Category?.Name ?? "No Category"
                 }).ToList()
             };

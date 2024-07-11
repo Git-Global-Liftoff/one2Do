@@ -18,13 +18,17 @@ namespace one2Do.Models.ToDoModels
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
-        public List<ToDoListCategory> ToDoListCategories { get; set; } // Add this property
-        public List<TaskItem> TaskItems { get; set; } // Add this property
+        [DataType(DataType.Date)]
+        [Display(Name = "Due Date")]
+        public DateTime DueDate { get; set; }
+
+        public List<ToDoListCategory> ToDoListCategories { get; set; }
+        public List<TaskItem> TaskItems { get; set; }
 
         public ToDoList()
         {
-            ToDoListCategories = new List<ToDoListCategory>(); // Initialize the list
-            TaskItems = new List<TaskItem>(); // Initialize the list
+            TaskItems = new List<TaskItem>();
+            ToDoListCategories = new List<ToDoListCategory>();
         }
     }
 }

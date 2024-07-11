@@ -8,21 +8,18 @@ namespace one2Do.ViewModels
 {
     public class AddToDoListViewModel
     {
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
         public DateTime DueDate { get; set; } = DateTime.Now;
         public bool IsCompleted { get; set; }
         public int CategoryId { get; set; }
-        public SelectList Categories { get; set; }
+        public SelectList Categories { get; set; } = new SelectList(new List<Category>());
 
         public AddToDoListViewModel(IEnumerable<Category> categories)
         {
-            Categories = categories != null ? new SelectList(categories, "Id", "Name") : new SelectList(new List<Category>());
+            Categories = new SelectList(categories, "Id", "Name");
         }
 
-        public AddToDoListViewModel()
-        {
-            Categories = new SelectList(new List<Category>());
-        }
+        public AddToDoListViewModel() { }
     }
 }

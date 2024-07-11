@@ -13,7 +13,7 @@
             <h2>Search By City Name</h2>
             <div>
                 <input asp-for="CityName" class="form-control" placeholder="Enter city name..." />
-                <button asp-controller = "Weather" asp-action="SearchByCity" class= "btn btn-outline-primary">
+                <button asp-controller = "Weather" asp-action="SearchByCity" class= "btn btn-outline-info">
                     Search
                 </button>
                 <span asp-validation-for="CityName" class="text-danger"></span>
@@ -24,6 +24,6 @@
 <br>
 <div>
         <form method = "get">
-                <button asp-controller="User" asp-action="index" class="btn btn-primary"> Go Back to Profile</button>
+                <button asp-controller="User" asp-action="index" class="btn btn-info"> Go Back to Profile</button>
             </form>   
 </div>

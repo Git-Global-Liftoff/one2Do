@@ -2,14 +2,16 @@
 
 
 <h2>ToDo Lists</h2>
-   <p>@Model.CompletedTasks of @Model.TotalTasks tasks completed!</p>
 
+   
 @foreach (var list in Model.ToDoItems)
 {
     <div class="card mb-4">
         <div class="card-header">
+            
             <h3>@list.Title</h3>
             <p>Category: @list.CategoryName</p>
+            <p class="progress-tacker">@list.CompletedTasks of @list.TotalTasks tasks completed!</p>
         </div>
         <div class="card-body">
             <table class="table">
@@ -33,7 +35,7 @@
             </table>
             <form method="get" asp-controller="TaskItem" asp-action="Create">
                 <input type="hidden" name="toDoListId" value="@list.ToDoListId" />
-                <button type="submit" class="btn btn-primary">Add Task</button>
+                <button type="submit" class="btn btn-info">Add Task</button>
             </form>
         </div>
     </div>

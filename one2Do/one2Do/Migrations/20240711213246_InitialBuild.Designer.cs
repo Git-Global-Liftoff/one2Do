@@ -12,7 +12,7 @@ using one2Do.Data;
 namespace one2Do.Migrations
 {
     [DbContext(typeof(one2doDbContext))]
-    [Migration("20240710155919_InitialBuild")]
+    [Migration("20240711213246_InitialBuild")]
     partial class InitialBuild
     {
         /// <inheritdoc />

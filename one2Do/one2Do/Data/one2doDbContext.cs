@@ -16,17 +16,16 @@ namespace one2Do.Data
         public DbSet<ToDoList> ToDoLists { get; set; }
         public DbSet<TaskItem> TaskItems { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<ToDoListCategory> ToDoListCategories { get; set; } // Join table for the many-to-many relationship
-        public DbSet<ListTemplate> ListTemplates { get; set; } 
-        public DbSet<ListTemplateCategory> ListTemplateCategories { get; set; } // Join table for ListTemplates and Categories
+        public DbSet<ToDoListCategory> ToDoListCategories { get; set; }
+        public DbSet<ListTemplate> ListTemplates { get; set; }
+        public DbSet<ListTemplateCategory> ListTemplateCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Define the many-to-many relationship using an explicit join entity for ToDoList and Category
             modelBuilder.Entity<ToDoListCategory>()
-                .HasKey(tlc => new { tlc.ToDoListId, tlc.CategoryId }); // Composite primary key
+                .HasKey(tlc => new { tlc.ToDoListId, tlc.CategoryId });
 
             modelBuilder.Entity<ToDoListCategory>()
                 .HasOne(tlc => tlc.ToDoList)
@@ -38,9 +37,8 @@ namespace one2Do.Data
                 .WithMany(c => c.ToDoListCategories)
                 .HasForeignKey(tlc => tlc.CategoryId);
 
-            // Define the many-to-many relationship using an explicit join entity for ListTemplate and Category
             modelBuilder.Entity<ListTemplateCategory>()
-                .HasKey(ltc => new { ltc.ListTemplateId, ltc.CategoryId }); // Composite primary key for ListTemplateCategory
+                .HasKey(ltc => new { ltc.ListTemplateId, ltc.CategoryId });
 
             modelBuilder.Entity<ListTemplateCategory>()
                 .HasOne(ltc => ltc.ListTemplate)
@@ -52,12 +50,11 @@ namespace one2Do.Data
                 .WithMany(c => c.ListTemplateCategories)
                 .HasForeignKey(ltc => ltc.CategoryId);
 
-            // Adding indexes to commonly queried columns
             modelBuilder.Entity<ToDoList>()
-                .HasIndex(t => t.UserId); // Index for UserId 
+                .HasIndex(t => t.UserId);
 
             modelBuilder.Entity<TaskItem>()
-                .HasIndex(ti => ti.ToDoListId); // Index for ToDoListId to improve join performance
+                .HasIndex(ti => ti.ToDoListId);
         }
     }
 }

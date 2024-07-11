@@ -9,9 +9,9 @@ namespace one2Do.ViewModels
     public class AddToDoListViewModel
     {
         public string Title { get; set; }
-        public string Description { get; set; } // Added Description
-        public DateTime DueDate { get; set; } = DateTime.Now; // Added DueDate
-        public bool IsCompleted { get; set; } // Added IsCompleted
+        public string Description { get; set; }
+        public DateTime DueDate { get; set; } = DateTime.Now;
+        public bool IsCompleted { get; set; }
         public int CategoryId { get; set; }
         public SelectList Categories { get; set; }
 

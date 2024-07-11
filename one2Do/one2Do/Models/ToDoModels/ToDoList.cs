@@ -18,23 +18,13 @@ namespace one2Do.Models.ToDoModels
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
-        [Required]
-        [Display(Name = "Task Description")]
-        public string Description { get; set; }
-
-        [DataType(DataType.Date)]
-        [Display(Name = "Due Date")]
-        public DateTime DueDate { get; set; }
-
-        [Display(Name = "Completed")]
-        public bool IsCompleted { get; set; }
-
-        public List<ToDoListCategory> ToDoListCategories { get; set; }
-        public List<TaskItem> Tasks { get; set; }
+        public List<ToDoListCategory> ToDoListCategories { get; set; } // Add this property
+        public List<TaskItem> TaskItems { get; set; } // Add this property
 
         public ToDoList()
         {
-            Tasks = new List<TaskItem>();
+            ToDoListCategories = new List<ToDoListCategory>(); // Initialize the list
+            TaskItems = new List<TaskItem>(); // Initialize the list
         }
     }
 }

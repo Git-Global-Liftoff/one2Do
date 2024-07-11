@@ -17,7 +17,7 @@
         <tr>
             <td>@item.Title</td>
             <td>@item.Description</td> <!-- Changed the column header label, not the variable name -->
-            <td>@item.DueDate.ToShortDateString()</td>
+            <td>@item.DueDate?.ToShortDateString()</td>
             <td>@item.IsCompleted</td>
             <td>@item.CategoryName</td>
         </tr>

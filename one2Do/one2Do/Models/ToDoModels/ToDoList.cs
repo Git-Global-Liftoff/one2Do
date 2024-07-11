@@ -27,7 +27,7 @@ namespace one2Do.Models.ToDoModels
         public bool IsCompleted { get; set; }
 
         public List<ToDoListCategory>? ToDoListCategories { get; set; }
-        public List<TaskItem> Tasks { get; set; }
+        public List<TaskItem> TaskItems { get; set; }
 
  
 
@@ -38,16 +38,15 @@ namespace one2Do.Models.ToDoModels
             ToDoListCategories = new List<ToDoListCategory>();
         }
 
-        public ToDoList(string title, string userId, int categoryId, Category category, string description, DateTime dueDate, bool isCompleted)
+        public ToDoList(string title, string userId, int categoryId, Category category, string v, DateTime dueDate, bool isCompleted)
         {
             Title = title;
             UserId = userId;
             CategoryId = categoryId;
             Category = category;
-            Description = description;
             DueDate = dueDate;
             IsCompleted = isCompleted;
-            Tasks = new List<TaskItem>();
+            TaskItems = new List<TaskItem>();
         }
     }
 }

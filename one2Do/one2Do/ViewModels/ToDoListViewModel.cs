@@ -5,7 +5,6 @@ namespace one2Do.ViewModels
     public class ToDoListViewModel
     {
 
-        public List<ToDoListItemViewModel> ToDoItems { get; set; } // Changed to ToDoItems
         public int TotalTasks {get; set;}
         public int CompletedTasks {get; set;}
 

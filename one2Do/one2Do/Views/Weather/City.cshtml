@@ -2,39 +2,85 @@
 
 @{
     ViewData["Title"] = "City";
+
+    // Define messages based on temperature ranges
+    string temperatureMessage;
+    if (Model.Temperature < 32)
+    {
+        temperatureMessage = "It's freezing! Stay warm!";
+    }
+    else if (Model.Temperature < 60)
+    {
+        temperatureMessage = "It's a bit chilly. You might need a jacket.";
+    }
+    else if (Model.Temperature < 80)
+    {
+        temperatureMessage = "The weather is quite pleasant.";
+    }
+    else
+    {
+        temperatureMessage = "It's hot outside! Stay cool and hydrated.";
+    }
 }
 
 <div class="container">
-    <div class="container">
-        <div class="form-group col-md-offset-3 col-md-5">
-            <h2>Forecast For Selected City</h2>
-            <label asp-for="Name"></label>
-            <span class="badge alert-primary">@Model.Name</span> <br />
-            
-            <label asp-for="Temperature"></label>
-            <span class="badge alert-primary">@Model.Temperature°</span> <br />
-            
-            <label asp-for="Humidity"></label>
-            <span class="badge alert-primary">@Model.Humidity</span> <br />
-            
-            <label asp-for="Pressure"></label>
-            <span class="badge alert-primary">@Model.Pressure</span> <br />
-            
-            <label asp-for="Wind"></label>
-            <span class="badge alert-primary">@Model.Wind</span> <br />
-            
-            <label asp-for="Weather"></label>
-            <span class="badge alert-primary">@Model.Weather</span> <br />
+    <div class="row">
+        <div class="col-md-4 mb-3 mx-auto"> <!-- Centering the card -->
+            <div class="card">
+                <div class="card-body text-center"> <!-- Centering the card content -->
+                    <h3 class="card-title" style="font-size: larger;">@Model.Name</h3> <!-- Larger font size for title -->
+                    <table class="table table-bordered"> <!-- Adding borders to the table -->
+                        <tbody>
+                            <tr>
+                                <th scope="row">Temperature</th>
+                                <td><span class="badge alert-primary">@Model.Temperature °F</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Humidity</th>
+                                <td><span class="badge alert-primary">@Model.Humidity %</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Pressure</th>
+                                <td><span class="badge alert-primary">@Model.Pressure hPa</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Wind Speed</th>
+                                <td><span class="badge alert-primary">@Model.Wind mph</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Weather</th>
+                                <td><span class="badge alert-primary">@Model.Weather</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- Display the temperature message -->
+                    <p class="mt-3">@temperatureMessage</p>
+                </div>
+                <div class="col-md-6 mb-3 mx-auto text-center"> <!-- Centering the button -->
+                    <form method="get">
+                        <button asp-controller="Weather" asp-action="SearchByCity" class="btn btn-danger btn-sm">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
             <form method = "get">
                 <button asp-controller="Weather" asp-action="SearchByCity" class="btn btn-info"> Go Back to City Search</button>
+
             </form>
         </div>
     </div>
 </div>
+<br>
 <div>
+
         <form method = "get">
                 <button asp-controller="user" asp-action="index" class="btn btn-info">Go Back to Profile </button>
             </form>   
 </div>
+
+
 

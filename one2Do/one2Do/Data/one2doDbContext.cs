@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using one2Do.Models;
 using one2Do.Models.QuoteModels;
 using one2Do.Models.ToDoModels;
+using one2Do.WeatherModel;
 
 namespace one2Do.Data
 {
@@ -18,7 +19,13 @@ namespace one2Do.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<ToDoListCategory> ToDoListCategories { get; set; }
         public DbSet<ListTemplate> ListTemplates { get; set; }
-        public DbSet<ListTemplateCategory> ListTemplateCategories { get; set; }
+
+//         public DbSet<Categories> Categories { get; set; }
+        public DbSet<ListTemplateCategory> ListTemplateCategories { get; set; } // Join table for the many-to-many relationship
+        
+        public DbSet<CityNames> Cities { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -39,19 +39,19 @@ ViewData["Title"] = "Register";
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             @* //2 user *@
-             @* <div class="form-floating">
+              <div class="form-floating">
                 <select asp-for="Role" asp-items="@Model.RoleList" class="form-select" aria-required="true">
                     <option disabled selected>Select Role</option>
                 </select>
                 <span asp-validation-for="Role" class="text-danger"></span>
-            </div> *@
+            </div> 
             
             <div class="row">
                 <div class="col-8">
                     <a asp-action="Login" class="text-decoration-none float-start mt-2">Have account?</a> 
                 </div>
                 <div class="col-4">
-                    <input type="submit" value="Register" class="btn btn-primary btn-sm float-end"/>
+                    <input type="submit" value="Register" class="btn btn-info btn-sm float-end"/>
                 </div>
             </div>
         </form>

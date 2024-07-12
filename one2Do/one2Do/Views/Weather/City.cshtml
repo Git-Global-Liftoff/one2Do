@@ -66,12 +66,21 @@
     </div>
 </div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 mb-3 mx-auto text-center"> <!-- Centering the button -->
-            <form method="get">
-                <button asp-controller="User" asp-action="Index" class="btn btn-primary btn-lg btn-block">Back To Home</button>
+
+            <form method = "get">
+                <button asp-controller="Weather" asp-action="SearchByCity" class="btn btn-info"> Go Back to City Search</button>
+
             </form>
         </div>
     </div>
 </div>
+<br>
+<div>
+
+        <form method = "get">
+                <button asp-controller="user" asp-action="index" class="btn btn-info">Go Back to Profile </button>
+            </form>   
+</div>
+
+
+

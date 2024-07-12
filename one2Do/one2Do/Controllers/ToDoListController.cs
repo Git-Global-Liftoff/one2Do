@@ -73,10 +73,10 @@ namespace one2Do.Controllers
                         DueDate = task.DueDate ?? DateTime.Now,
                         IsCompleted = task.IsCompleted
                     }).ToList(),
-                    CategoryName = t.Category?.Name ?? "No Category"
+                    CategoryName = t.Category?.Name ?? "No Category",
+                    TotalTasks = t.TaskItems.Count,
+                    CompletedTasks = t.TaskItems.Count(t => t.IsCompleted)
                 }).ToList(),
-                TotalTasks = toDoLists.Count,
-                CompletedTasks = toDoLists.Count(t => t.IsCompleted)
             };
 
             return View(viewModel);

@@ -17,26 +17,27 @@
     <p>@ViewData["Quote"]</p> <!-- Display the random quote here -->
 
     <form method="get">
-        <button asp-controller="ToDoList" asp-action="Create" class="btn btn-primary">Create New List</button>
+        <button asp-controller="ToDoList" asp-action="Create" class="btn btn-info">Create New List</button>
     </form>
 <br>
     <form method="get">
-        <button asp-controller="ToDoList" asp-action="Index" class="btn btn-primary">Your Lists</button>
+        <button asp-controller="ToDoList" asp-action="Index" class="btn btn-info">Your Lists</button>
     </form>
 <br>
     <form method="get">
-        <button asp-controller="ChooseTemplate" asp-action="Index" class="btn btn-primary">View Generic Templates</button>
+        <button asp-controller="ChooseTemplate" asp-action="Index" class="btn btn-info">View Generic Templates</button>
     </form>
 <br>
     <form method="get">
-        <button asp-controller="Weather" asp-action="SearchByCity" class="btn btn-primary">View Weather Single City</button>
+
+        <button asp-controller="Weather" asp-action="SearchByCity" class="btn btn-info">View Weather Single City</button>
     </form>
     <form method="get">
-        <button asp-controller="Cities" asp-action="Index" class="btn btn-primary">View Weather for Multiple Cities</button>
+        <button asp-controller="Cities" asp-action="Index" class="btn btn-info">View Weather for Multiple Cities</button>
     </form>
 <br>
     <!-- Form for searching by category -->
-    <form asp-controller="User" asp-action="SearchByCategory" method="post">
+    @* <form asp-controller="User" asp-action="SearchByCategory" method="post">
         <div class="form-group">
             <label for="category">Select Category:</label>
             <select name="category" class="form-control">
@@ -48,6 +49,6 @@
             </select>
         </div>
         <br />
-        <input type="submit" value="Search" class="btn btn-primary" />
-    </form>
+        <input type="submit" value="Search" class="btn btn-info" />
+    </form> *@
 </div>

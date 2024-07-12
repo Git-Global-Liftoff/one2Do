@@ -10,27 +10,26 @@
             <h2>Search By City</h2>
             <div class="input-group mb-3">
                 <input asp-for="CityName" class="form-control" placeholder="Enter city name..." />
+
+
                 <div class="input-group-append">
                     <button asp-controller="Weather" asp-action="SearchByCity" class="btn btn-success" type="submit">
                         Search
                     </button>
                 </div>
+
                 <span asp-validation-for="CityName" class="text-danger"></span>
             </div>
         </div>
     </form>
 
-    <div>
-        <form method="get">
-            <button asp-controller="User" asp-action="index" class="btn btn-primary mt-3">Back to Home</button>
-        </form>
-    </div>
+    
 </div>
 
 <br>
 <div>
         <form method = "get">
-                <button asp-controller="User" asp-action="index" class="btn btn-primary"> Go Back to Profile</button>
+                <button asp-controller="User" asp-action="index" class="btn btn-info"> Go Back to Profile</button>
             </form>   
 </div>
 

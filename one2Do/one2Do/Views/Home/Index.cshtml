@@ -15,18 +15,18 @@
         <br>
         <p>Get started!</p>
         <form method="get">
-        <button asp-controller="Account" asp-action="Register" class="btn btn-primary">Create an Account</button>
+        <button asp-controller="Account" asp-action="Register" class="btn btn-info">Create an Account</button>
     </form>
     <br>
     <form method="get">
-        <button asp-controller="Account" asp-action="Login" class="btn btn-primary">Login</button>
+        <button asp-controller="Account" asp-action="Login" class="btn btn-info">Login</button>
     </form>
      @if (User.Identity.IsAuthenticated)
                         {
                             <br>
                         <p>Already logged in?</p>
                         <form method="get">
-                        <button asp-controller="User" asp-action ="Index" class="btn btn-primary">Go to Profile</button>
+                        <button asp-controller="User" asp-action ="Index" class="btn btn-info">Go to Profile</button>
                         </form>
                         }
     

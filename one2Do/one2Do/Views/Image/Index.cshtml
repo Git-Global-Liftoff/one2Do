@@ -1,0 +1,42 @@
+@model IEnumerable<one2Do.Models.Image>
+
+@{
+    ViewData["Title"] = "My Images";
+}
+
+<h2>My Images</h2>
+
+<!-- Upload Form -->
+<form asp-action="Index" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="file">Select Image</label>
+        <input type="file" name="file" id="file" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>
+
+<!-- Image Listing -->
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var image in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@image.ImageUrl" alt="Image" style="height: 100px; width: auto;" />
+                </td>
+                <td>
+                    <form asp-action="Delete" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@image.Id" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

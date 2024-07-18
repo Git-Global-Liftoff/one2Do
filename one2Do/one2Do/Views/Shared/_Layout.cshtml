@@ -33,17 +33,17 @@
                             @if (User.IsInRole("Premium"))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Cities" asp-action="Index">Premium</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Cities" asp-action="Index">Premium Weather</a>
                                     </li>
                                 }
                             else
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Weather" asp-action="SearchByCity">Basic</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Weather" asp-action="SearchByCity">Basic Weather</a>
                                 </li>
                             }
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Image" asp-action="Upload">Image Upload</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Image" asp-action="Index">Gallery</a>
                             </li>
                         }                        
                     </ul>

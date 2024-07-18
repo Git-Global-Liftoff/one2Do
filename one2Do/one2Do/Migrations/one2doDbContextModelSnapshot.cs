@@ -386,7 +386,7 @@ namespace one2Do.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("one2Do.WeatherModel.CityNames", b =>
+            modelBuilder.Entity("one2Do.WeatherModel.City", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

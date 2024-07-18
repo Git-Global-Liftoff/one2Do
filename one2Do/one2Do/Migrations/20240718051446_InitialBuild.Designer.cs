@@ -12,7 +12,7 @@ using one2Do.Data;
 namespace one2Do.Migrations
 {
     [DbContext(typeof(one2doDbContext))]
-    [Migration("20240712145629_InitialBuild")]
+    [Migration("20240718051446_InitialBuild")]
     partial class InitialBuild
     {
         /// <inheritdoc />
@@ -389,7 +389,7 @@ namespace one2Do.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("one2Do.WeatherModel.CityNames", b =>
+            modelBuilder.Entity("one2Do.WeatherModel.City", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

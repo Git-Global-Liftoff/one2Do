@@ -23,7 +23,7 @@ namespace one2Do.Data
 //         public DbSet<Categories> Categories { get; set; }
         public DbSet<ListTemplateCategory> ListTemplateCategories { get; set; } // Join table for the many-to-many relationship
         
-        public DbSet<CityNames> Cities { get; set; }
+        public DbSet<City> Cities { get; set; }
 
 
 
@@ -62,6 +62,20 @@ namespace one2Do.Data
 
             modelBuilder.Entity<TaskItem>()
                 .HasIndex(ti => ti.ToDoListId);
+                
+            modelBuilder.Entity<City>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.UserId).IsRequired();
+                entity.Property(e => e.Name).IsRequired();
+
+                // Ignore properties that are not mapped to the database
+                entity.Ignore(e => e.Temperature);
+                entity.Ignore(e => e.Humidity);
+                entity.Ignore(e => e.Pressure);
+                entity.Ignore(e => e.Wind);
+                entity.Ignore(e => e.Weather);
+            });
         }
     }
 }

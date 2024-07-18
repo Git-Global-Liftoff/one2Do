@@ -35,7 +35,7 @@ namespace one2Do.Controllers
             foreach (var city in cities)
             {
                 WeatherResponse weatherResponse = _WForecastRepository.GetForecast(city.Name);
-                if (weatherResponse != null)
+                if (weatherResponse != null && weatherResponse.Weather != null && weatherResponse.Weather.Count > 0)
                 {
                     var viewModel = new City
                     {
@@ -46,6 +46,7 @@ namespace one2Do.Controllers
                         Wind = weatherResponse.Wind.Speed
                     };
                     cityWeatherList.Add(viewModel);
+                    Console.WriteLine($"Found city '{city.Name}' and {city.Id} to remove.");
                 }
             }
 
@@ -59,7 +60,7 @@ namespace one2Do.Controllers
             var userId = _userManager.GetUserId(User);
             if (!string.IsNullOrEmpty(cityName) && !_context.Cities.Any(c => c.Name == cityName && c.UserId == userId))
             {
-                _context.Cities.Add(new CityNames { Name = cityName, UserId = userId });
+                _context.Cities.Add(new City { Name = cityName, UserId = userId });
                 _context.SaveChanges();
             }
             return RedirectToAction("Index");
@@ -69,12 +70,20 @@ namespace one2Do.Controllers
         [HttpPost]
         public IActionResult RemoveCity(string cityName)
         {
-             var city = _context.Cities.FirstOrDefault(c => c.Name == cityName && c.UserId == _userManager.GetUserId(User));
+            var userId = _userManager.GetUserId(User);
+            Console.WriteLine($"Attempting to remove city with ID for user ID {userId}");
+             var city = _context.Cities.FirstOrDefault(c => c.Name == cityName && c.UserId == userId);
             if (city != null)
             {
+                 Console.WriteLine($"Found city '{city.Name}' to remove.");
                 _context.Cities.Remove(city);
                 _context.SaveChanges();
+                 Console.WriteLine($"City '{city.Name}' successfully removed.");
             }
+             else
+    {
+        Console.WriteLine($"City with IDnot found for user ID {userId}.");
+    }
             return RedirectToAction("Index");
         }
     }

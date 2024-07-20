@@ -65,7 +65,7 @@ using (var scope = app.Services.CreateScope())
     DbInitializer.Initialize(services);
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-    var roles = new[] { "Basic", "Premium"};
+    var roles = new[] { "Basic", "Premium", "Admin"};
 
     foreach (var role in roles)
     {

@@ -15,15 +15,15 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 10px;"> 
                 @user.FirstName @user.LastName 
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li class="nav-item">
                     <a id="manage" class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Manage account</a>
                 </li>
                 <li>
-                    <a class="dropdown-item text-white bg-danger" asp-controller="Account" asp-action="Logout" >
+                    <a class="dropdown-item text-white bg-danger" asp-controller="Account" asp-action="Logout">
                         Logout
                     </a>
                 </li>

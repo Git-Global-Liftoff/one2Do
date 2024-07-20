@@ -59,3 +59,62 @@ body {
   width: 50px; /* Adjust icon size */
   height: 50px;
 }
+
+
+/* General styles for the project summary */
+.project-summary {
+    background-color: #f0f8ff; 
+    border: 2px solid #b0c4de; 
+    border-radius: 10px; 
+    padding: 20px; 
+    margin: 20px auto; 
+    max-width: 900px; 
+    text-align: center; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.project-summary h2 {
+    color: #4682b4; 
+    font-size: 28px; 
+    margin-bottom: 15px;
+}
+
+.project-summary p {
+    color: #333; 
+    font-size: 18px; 
+    line-height: 1.6;
+}
+
+.feature-container {
+    display: flex; 
+    justify-content: space-around; 
+    margin-top: 20px;
+}
+
+.feature-item {
+    width: 250px; 
+    height: 285px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 10px;
+}
+
+.feature-item img {
+    width: 100%; 
+    height: 70%; 
+    object-fit: cover; 
+    border-radius: 8px;
+}
+
+.feature-item p {
+    color: #4682b4; 
+    font-size: 16px; 
+    margin-top: 10px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}

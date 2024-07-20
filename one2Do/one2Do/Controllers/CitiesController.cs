@@ -47,9 +47,18 @@ public class CitiesController : Controller
                 {
                     Name = weatherResponse.Name,
                     Temperature = weatherResponse.Main.Temp,
+                    Temp_min = weatherResponse.Main.Temp_min,
+                    Temp_max = weatherResponse.Main.Temp_max,
                     Humidity = weatherResponse.Main.Humidity,
+                    Pressure = weatherResponse.Main.Pressure,
                     Weather = weatherResponse.Weather[0].Main,
-                    Wind = weatherResponse.Wind.Speed
+                    Wind = weatherResponse.Wind.Speed,
+                    Timezone = weatherResponse.Timezone,
+                    Clouds = weatherResponse.Clouds.All,
+                    Message = weatherResponse.Sys.Message,
+                    Icon = "http://openweathermap.org/img/w/" + weatherResponse.Weather[0].Icon + ".png",
+                    Country = weatherResponse.Sys.Country,
+                    Description = weatherResponse.Weather[0].Description
                 };
                 cityWeatherList.Add(viewModel);
             }

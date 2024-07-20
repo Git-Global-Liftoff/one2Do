@@ -2,25 +2,6 @@
 
 @{
     ViewData["Title"] = "City";
-
-    // Define messages based on temperature ranges
-    string temperatureMessage;
-    if (Model.Temperature < 32)
-    {
-        temperatureMessage = "It's freezing! Stay warm!";
-    }
-    else if (Model.Temperature < 60)
-    {
-        temperatureMessage = "It's a bit chilly. You might need a jacket.";
-    }
-    else if (Model.Temperature < 80)
-    {
-        temperatureMessage = "The weather is quite pleasant.";
-    }
-    else
-    {
-        temperatureMessage = "It's hot outside! Stay cool and hydrated.";
-    }
 }
 
 <div class="container">
@@ -28,12 +9,27 @@
         <div class="col-md-4 mb-3 mx-auto"> <!-- Centering the card -->
             <div class="card">
                 <div class="card-body text-center"> <!-- Centering the card content -->
-                    <h3 class="card-title" style="font-size: larger;">@Model.Name</h3> <!-- Larger font size for title -->
+                    <h3>
+                        @Model.Name
+                        <img src="@Model.Icon" alt="Weather Icon" class="weather-icon">
+                    </h3>
+                    <div class="d-flex align-items-center justify-content-center mt-2">
+                        <span class="badge alert-primary temperature-badge">@Model.Temperature °F</span>
+                    </div>
+                    <h2></h2>
                     <table class="table table-bordered"> <!-- Adding borders to the table -->
                         <tbody>
                             <tr>
-                                <th scope="row">Temperature</th>
-                                <td><span class="badge alert-primary">@Model.Temperature °F</span></td>
+                                <th scope="row">Condition</th>
+                                <td>
+                                    <span class="badge alert-primary capitalize-text">
+                                        @Model.Description
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Min/Max</th>
+                                <td><span class="badge alert-primary">@Model.Temp_min °F / @Model.Temp_max °F</span></td>
                             </tr>
                             <tr>
                                 <th scope="row">Humidity</th>
@@ -48,13 +44,11 @@
                                 <td><span class="badge alert-primary">@Model.Wind mph</span></td>
                             </tr>
                             <tr>
-                                <th scope="row">Weather</th>
-                                <td><span class="badge alert-primary">@Model.Weather</span></td>
+                                <th scope="row">Clouds</th>
+                                <td><span class="badge alert-primary">@Model.Clouds %</span></td>
                             </tr>
                         </tbody>
                     </table>
-                    <!-- Display the temperature message -->
-                    <p class="mt-3">@temperatureMessage</p>
                 </div>
                 <div class="col-md-6 mb-3 mx-auto text-center"> <!-- Centering the button -->
                     <form method="get">
@@ -64,11 +58,4 @@
             </div>
         </div>
     </div>
-</div>  
-        </div>
-    </div>
 </div>
-
-
-
-

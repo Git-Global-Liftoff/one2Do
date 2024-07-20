@@ -15,10 +15,15 @@ public class City
     [Display(Name = "City name:")]
     public string Name { get; set; }
 
-    // These properties won't be mapped to the database
     [NotMapped]
     [Display(Name = "Temp.")]
     public float Temperature { get; set; }
+    [NotMapped]
+    [Display(Name = "Temp Minimum.")]
+    public float Temp_min { get; set; }
+    [NotMapped]
+    [Display(Name = "Temp Maximum")]
+    public float Temp_max { get; set; }
 
     [NotMapped]
     [Display(Name = "Humidity")]
@@ -33,6 +38,32 @@ public class City
     public float Wind { get; set; }
 
     [NotMapped]
-    [Display(Name = "Weather Condition:.")]
+    [Display(Name = "Weather Condition.")]
     public string Weather { get; set; }
+
+    [NotMapped]
+    [Display(Name = "Timezone.")]
+    public int Timezone { get; set; }
+
+    [NotMapped]
+    [Display(Name = "Clouds.")]
+    public int Clouds { get; set; }
+
+    [NotMapped]
+    [Display(Name = "Message.")]
+    public float Message { get; set; }
+
+    [NotMapped]
+    [Display(Name = "Icon.")]
+    public string Icon { get; set; }
+
+
+    [NotMapped]
+    [Display(Name = "Country.")]
+    public string Country { get; set; }
+    
+    [NotMapped]
+    [Display(Name = "Description.")]
+    public string Description { get; set; }
+
 }

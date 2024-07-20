@@ -34,3 +34,28 @@ body {
 }
 
 
+.temperature-badge {
+  font-size: 1rem; /* Slightly larger font size for better visibility */
+  font-weight: 600; /* Semi-bold text for readability */
+  padding: 12px 12px; /* Added padding for better proportion */
+  border-radius: 1.5rem; /* More rounded corners for a softer look */
+  background-color: #b1e6ee; /* Softer background color for contrast */
+  color: #291653; /* White text color for better readability */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Lighter text shadow for a softer effect */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.temperature-badge:hover {
+  background-color: #138496; /* Slightly darker background on hover */
+  transform: scale(1.1); /* Slightly larger badge on hover */
+}
+
+.capitalize-text {
+  text-transform: capitalize;
+}
+
+.weather-icon {
+  width: 50px; /* Adjust icon size */
+  height: 50px;
+}

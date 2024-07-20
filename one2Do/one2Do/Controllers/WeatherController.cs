@@ -44,10 +44,18 @@ public class WeatherController : Controller
         {
             viewModel.Name = weatherResponse.Name;
             viewModel.Temperature = weatherResponse.Main.Temp;
+            viewModel.Temp_min = weatherResponse.Main.Temp_min;
+            viewModel.Temp_max = weatherResponse.Main.Temp_max;
             viewModel.Humidity = weatherResponse.Main.Humidity;
             viewModel.Pressure = weatherResponse.Main.Pressure;
             viewModel.Weather = weatherResponse.Weather[0].Main;
             viewModel.Wind = weatherResponse.Wind.Speed;
+            viewModel.Timezone = weatherResponse.Timezone;
+            viewModel.Clouds = weatherResponse.Clouds.All;
+            viewModel.Message = weatherResponse.Sys.Message;
+            viewModel.Icon = "http://openweathermap.org/img/w/" + weatherResponse.Weather[0].Icon + ".png";
+            viewModel.Country = weatherResponse.Sys.Country;
+            viewModel.Description = weatherResponse.Weather[0].Description;
         }
         return View(viewModel);
     }

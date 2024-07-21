@@ -6,6 +6,7 @@ namespace one2Do.Models.ToDoModels
 {
     public class ToDoList
     {
+        public User User { get; set; }
         public int Id { get; set; }
 
         [Required]

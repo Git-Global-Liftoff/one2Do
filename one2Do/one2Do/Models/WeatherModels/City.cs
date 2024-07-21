@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using one2Do.Models;
 
 namespace one2Do.WeatherModel;
 
@@ -65,5 +66,7 @@ public class City
     [NotMapped]
     [Display(Name = "Description.")]
     public string Description { get; set; }
+
+    public User User { get; set; }
 
 }

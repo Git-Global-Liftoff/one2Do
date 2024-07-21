@@ -21,7 +21,6 @@ public class ImageController : Controller
         _userManager = userManager;
     }
 
-    // GET: Image/Index
     public async Task<IActionResult> Index()
     {
         var userId = _userManager.GetUserId(User);
@@ -29,7 +28,7 @@ public class ImageController : Controller
         return View(images);
     }
 
-    // POST: Image/Upload
+
     [HttpPost]
     public async Task<IActionResult> Index(IFormFile file)
     {
@@ -57,7 +56,7 @@ public class ImageController : Controller
         return RedirectToAction("Index");
     }
 
-    // POST: Image/Delete/5
+
     [HttpPost]
     public async Task<IActionResult> Delete(int id)
     {

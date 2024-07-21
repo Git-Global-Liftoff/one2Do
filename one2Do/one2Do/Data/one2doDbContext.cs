@@ -58,11 +58,32 @@ namespace one2Do.Data
                 .WithMany(c => c.ListTemplateCategories)
                 .HasForeignKey(ltc => ltc.CategoryId);
 
+
+            //Added relations for the following entities
+
             modelBuilder.Entity<ToDoList>()
-                .HasIndex(t => t.UserId);
+                .HasOne(t => t.User)
+                .WithMany(u => u.ToDoLists)
+                .HasForeignKey(t => t.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<TaskItem>()
-                .HasIndex(ti => ti.ToDoListId);
+                .HasOne(t => t.ToDoList)
+                .WithMany(t => t.TaskItems)
+                .HasForeignKey(t => t.ToDoListId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Image>()
+                .HasOne( i => i.User)
+                .WithMany( i => i.Images)
+                .HasForeignKey( i => i.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<City>()
+                .HasOne( c => c.User)
+                .WithMany( c => c.Cities)
+                .HasForeignKey( c => c.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

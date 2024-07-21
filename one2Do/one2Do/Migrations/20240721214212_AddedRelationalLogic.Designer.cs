@@ -12,8 +12,8 @@ using one2Do.Data;
 namespace one2Do.Migrations
 {
     [DbContext(typeof(one2doDbContext))]
-    [Migration("20240720024449_InitialBuild")]
-    partial class InitialBuild
+    [Migration("20240721214212_AddedRelationalLogic")]
+    partial class AddedRelationalLogic
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -189,9 +189,11 @@ namespace one2Do.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Images");
                 });
@@ -424,9 +426,11 @@ namespace one2Do.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Cities");
                 });
@@ -482,6 +486,17 @@ namespace one2Do.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("one2Do.Models.Image", b =>
+                {
+                    b.HasOne("one2Do.Models.User", "User")
+                        .WithMany("Images")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("one2Do.Models.ListTemplateCategory", b =>
                 {
                     b.HasOne("one2Do.Models.Category", "Category")
@@ -524,7 +539,15 @@ namespace one2Do.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("one2Do.Models.User", "User")
+                        .WithMany("ToDoLists")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("one2Do.Models.ToDoModels.ToDoListCategory", b =>
@@ -544,6 +567,17 @@ namespace one2Do.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("ToDoList");
+                });
+
+            modelBuilder.Entity("one2Do.WeatherModel.City", b =>
+                {
+                    b.HasOne("one2Do.Models.User", "User")
+                        .WithMany("Cities")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("one2Do.Models.Category", b =>
@@ -567,6 +601,15 @@ namespace one2Do.Migrations
                     b.Navigation("TaskItems");
 
                     b.Navigation("ToDoListCategories");
+                });
+
+            modelBuilder.Entity("one2Do.Models.User", b =>
+                {
+                    b.Navigation("Cities");
+
+                    b.Navigation("Images");
+
+                    b.Navigation("ToDoLists");
                 });
 #pragma warning restore 612, 618
         }

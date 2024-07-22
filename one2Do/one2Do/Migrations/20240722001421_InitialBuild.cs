@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace one2Do.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedRelationalLogic : Migration
+    public partial class InitialBuild : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -248,7 +248,7 @@ namespace one2Do.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Cities",
+                name: "CityNames",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -260,9 +260,9 @@ namespace one2Do.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cities", x => x.Id);
+                    table.PrimaryKey("PK_CityNames", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cities_AspNetUsers_UserId",
+                        name: "FK_CityNames_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -444,8 +444,8 @@ namespace one2Do.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cities_UserId",
-                table: "Cities",
+                name: "IX_CityNames_UserId",
+                table: "CityNames",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -503,7 +503,7 @@ namespace one2Do.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Cities");
+                name: "CityNames");
 
             migrationBuilder.DropTable(
                 name: "Images");

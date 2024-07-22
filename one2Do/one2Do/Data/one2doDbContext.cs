@@ -31,6 +31,8 @@ namespace one2Do.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            
+            modelBuilder.Entity<City>().ToTable("CityNames");
 
             modelBuilder.Entity<ToDoListCategory>()
                 .HasKey(tlc => new { tlc.ToDoListId, tlc.CategoryId });

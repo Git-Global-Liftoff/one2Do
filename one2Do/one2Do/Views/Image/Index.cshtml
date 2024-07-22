@@ -24,6 +24,7 @@
     <thead>
         <tr>
             <th>Image</th>
+            <th>Name</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -33,6 +34,9 @@
             <tr>
                 <td>
                     <img src="@image.ImageUrl" alt="Image" style="height: 100px; width: auto;" />
+                </td>
+                <td>
+                    <h3>@image.Name</h3>
                 </td>
                 <td>
                     <form asp-action="Delete" method="post" style="display:inline;">

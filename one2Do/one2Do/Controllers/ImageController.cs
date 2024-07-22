@@ -47,7 +47,7 @@ public class ImageController : Controller
                 await file.CopyToAsync(stream);
             }
 
-            var image = new Image { UserId = userId, ImageUrl = $"/images/{fileName}" };
+            var image = new Image { UserId = userId, ImageUrl = $"/images/{fileName}", Name = file.FileName };
 
             _context.Images.Add(image);
             await _context.SaveChangesAsync();

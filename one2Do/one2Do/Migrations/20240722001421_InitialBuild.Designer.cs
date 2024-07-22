@@ -12,8 +12,8 @@ using one2Do.Data;
 namespace one2Do.Migrations
 {
     [DbContext(typeof(one2doDbContext))]
-    [Migration("20240721214212_AddedRelationalLogic")]
-    partial class AddedRelationalLogic
+    [Migration("20240722001421_InitialBuild")]
+    partial class InitialBuild
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -432,7 +432,7 @@ namespace one2Do.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Cities");
+                    b.ToTable("CityNames", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

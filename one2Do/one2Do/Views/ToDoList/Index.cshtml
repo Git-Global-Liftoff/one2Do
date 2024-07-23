@@ -26,7 +26,7 @@
                 @foreach (var task in list.TaskItems)
                 {
                     <tr>
-                        <td>@task.TaskDescription</td>
+                        <td>@task.Description</td>
                         <td>@(task.DueDate.HasValue ? task.DueDate.Value.ToShortDateString() : "No Due Date")</td>
                         <td>@task.IsCompleted</td>
                     </tr>

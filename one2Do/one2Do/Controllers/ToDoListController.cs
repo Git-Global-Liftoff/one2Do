@@ -69,7 +69,7 @@ namespace one2Do.Controllers
                     Title = t.Title,
                     TaskItems = t.TaskItems.Select(task => new TaskItemViewModel
                     {
-                        TaskDescription = task.Description,
+                        Description = task.Description,
                         DueDate = task.DueDate ?? DateTime.Now,
                         IsCompleted = task.IsCompleted
                     }).ToList(),

@@ -11,3 +11,11 @@ namespace one2Do.Models.QuoteModels
         public string Text { get; set; }
     }
 }
+
+public class InspirationalQuote
+{
+    public string text { get; set; }
+    public string? id { get; set; }
+    public string author { get; set; }
+
+}

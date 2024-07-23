@@ -14,7 +14,8 @@ namespace one2Do.Data
         }
 
         public DbSet<Quote> Quotes { get; set; }
-        public DbSet<Quote> SavedQuotes { get; set; }
+
+        public DbSet<SavedQuote> SavedQuotes { get; set; }
         public DbSet<ToDoList> ToDoLists { get; set; }
         public DbSet<TaskItem> TaskItems { get; set; }
         public DbSet<Category> Categories { get; set; }

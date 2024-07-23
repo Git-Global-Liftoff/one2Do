@@ -5,6 +5,7 @@ using one2Do.Models.ToDoModels;
 using one2Do.Models.QuoteModels;
 using System;
 using System.Linq;
+using one2Do.Models.QuoteModels;
 
 namespace one2Do.Data
 {

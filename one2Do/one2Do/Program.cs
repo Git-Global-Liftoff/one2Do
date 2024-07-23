@@ -10,6 +10,7 @@ builder.Services.AddScoped<IWForecastRepository, WForecastRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient<QuoteService>();
 
 //Added code as it was throwing an error
 builder.Services.AddRazorPages();

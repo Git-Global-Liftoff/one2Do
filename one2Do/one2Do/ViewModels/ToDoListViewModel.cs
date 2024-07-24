@@ -9,6 +9,7 @@ namespace one2Do.ViewModels
         public int CompletedTasks {get; set;}
 
         public List<ToDoListItemViewModel> ToDoItems { get; set; } = new List<ToDoListItemViewModel>();
-
+        public string SelectedCategory { get; internal set; }
+        public List<string> Categories { get; internal set; }
     }
 }

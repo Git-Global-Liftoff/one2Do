@@ -30,3 +30,38 @@
     </ul>
 </body>
 </html>
+
+
+@* @model SelectedQuoteViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quotes</title>
+</head>
+<body>
+    <h1>Quotes</h1>
+    <ul>
+        @if (Model != null && Model.Quotes != null && Model.Quotes.Any())
+        {
+            <form asp-action="SaveQuote" method="post">
+                <ul>
+                    @foreach (var quote in Model.Quotes)
+                    {
+                        <li>
+                            <input type="radio" id="@quote.text" name="SelectedQuote" value="@quote.text" />
+                            <label for="@quote.text"><strong>@quote.text</strong> - <em>@quote.author</em></label>
+                        </li>
+                    }
+                </ul>
+                <button type="submit">Save Selected Quote</button>
+            </form>
+        }
+        else
+        {
+            <li>No quotes available.</li>
+        }
+    </ul>
+</body>
+</html>
+ *@

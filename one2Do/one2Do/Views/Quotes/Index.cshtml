@@ -12,7 +12,7 @@
         {
     <form asp-action="SaveQuote" method="post">
         <ul>
-            @foreach (var quote in Model.Quotes)
+            @foreach (var quote in Model?.Quotes)
             {
                 <li>
                     <input type="radio" id="@quote.text" name="SelectedQuote" value="@quote.text" />

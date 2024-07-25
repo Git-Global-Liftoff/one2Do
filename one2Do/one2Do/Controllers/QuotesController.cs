@@ -95,7 +95,7 @@ namespace one2Do
             }
 
            // Re-fetch quotes in case of an error
-            model.SavedQuotes = await _dbContext.SavedQuotes.ToListAsync();
+            model.Quotes = await _quoteService.GetQuotesAsync();
             return View("Index", model);
         }
     }

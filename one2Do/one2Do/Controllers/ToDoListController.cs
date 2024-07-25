@@ -89,4 +89,43 @@ namespace one2Do.Controllers;
         return View(viewModel);
     }
 }
+//THE FOLLOWING IS RECOMMENDED FOR CHANGES to MAKE TO ABOVE CODE THAT WILL EXECUTE DESIRED OUTCOMES: 
 
+// // GET: ToDoList/Index
+// public async Task<IActionResult> Index(string category)
+// {
+//     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+//     var toDoListsQuery = _context.ToDoLists
+//         .Include(t => t.Category)
+//         .Include(t => t.TaskItems)
+//         .Where(t => t.UserId == userId);
+
+//     if (!string.IsNullOrEmpty(category))
+//     {
+//         toDoListsQuery = toDoListsQuery.Where(t => t.Category.Name == category);
+//     }
+
+//     var toDoLists = await toDoListsQuery.ToListAsync();
+
+//     var viewModel = new ToDoListViewModel
+//     {
+//         Categories = await _context.Categories.Select(c => c.Name).ToListAsync(),
+//         SelectedCategory = category,
+//         ToDoItems = toDoLists.Select(t => new ToDoListItemViewModel
+//         {
+//             ToDoListId = t.Id,
+//             Title = t.Title,
+//             TaskItems = t.TaskItems.Select(task => new TaskItemViewModel
+//             {
+//                 TaskDescription = task.Description,
+//                 DueDate = task.DueDate ?? DateTime.Now,
+//                 IsCompleted = task.IsCompleted
+//             }).ToList(),
+//             CategoryName = t.Category?.Name ?? "No Category",
+//             TotalTasks = t.TaskItems.Count,
+//             CompletedTasks = t.TaskItems.Count(t => t.IsCompleted)
+//         }).ToList(),
+//     };
+
+//     return View(viewModel);
+// }

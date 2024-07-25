@@ -28,9 +28,7 @@ namespace one2Do.Models.ToDoModels
 
         public List<ToDoListCategory>? ToDoListCategories { get; set; }
         public List<TaskItem> TaskItems { get; set; }
-
- 
-
+        public string? Description { get; internal set; }
 
         public ToDoList()
         {

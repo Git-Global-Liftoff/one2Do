@@ -103,4 +103,76 @@ public class HouseholdToDoListController : Controller
 //             IsCompleted = isCompleted;
 //         }
 
+//THIS MIRRORS THE OTHER TWO TODOLIST CONTROLLERS AND INCLUDES ERROR HANDLING (ERRANDS CONTROLLER DOES NOT INCLUDE ERROR HANDLING, I DON'T BELIEVE....YET....BC IT'S NOT NECESSARY WITH DROP DOWN BOXES?):
+// using System;
+// using System.Linq;
+// using System.Security.Claims;
+// using Microsoft.AspNetCore.Authorization;
+// using Microsoft.AspNetCore.Mvc;
+// using Microsoft.AspNetCore.Mvc.Rendering;
+// using one2Do.Data;
+// using one2Do.Models.ToDoModels;
 
+// namespace one2Do
+// {
+//     [Authorize]
+//     public class HouseholdToDoListController : Controller
+//     {
+//         private readonly one2doDbContext _context;
+//         private readonly string[] HouseholdItems =
+//         {
+//             "Laundry",
+//             "Organize Closets",
+//             "Iron",
+//             "Dishes",
+//             "Wash Baseboards",
+//             "Dust",
+//             "Change Linens"
+//         };
+
+//         public HouseholdToDoListController(one2doDbContext context)
+//         {
+//             _context = context;
+//         }
+
+//         [HttpPost]
+//         public IActionResult Create(string categoryName)
+//         {
+//             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+//             var category = _context.Categories.FirstOrDefault(c => c.Name == categoryName);
+
+//             if (category == null)
+//             {
+//                 TempData["ErrorMessage"] = $"Category '{categoryName}' not found.";
+//                 return RedirectToAction("Index", "Home");
+//             }
+
+//             var newToDoList = new ToDoList
+//             {
+//                 Title = $"{categoryName} ToDo Template",
+//                 UserId = userId,
+//                 Category = category,
+//                 Description = $"To do related to {categoryName}",
+//                 DueDate = DateTime.Now,
+//                 IsCompleted = false
+//             };
+
+//             foreach (var item in HouseholdItems)
+//             {
+//                 var taskItem = new TaskItem
+//                 {
+//                     Description = item,
+//                     DueDate = DateTime.Now,
+//                     IsCompleted = false,
+//                     ToDoList = newToDoList
+//                 };
+//                 _context.TaskItems.Add(taskItem);
+//             }
+
+//             _context.ToDoLists.Add(newToDoList);
+//             _context.SaveChanges();
+
+//             return RedirectToAction("Index", "ToDoList");
+//         }
+//     }
+// }

@@ -12,7 +12,7 @@ using one2Do.Data;
 namespace one2Do.Migrations
 {
     [DbContext(typeof(one2doDbContext))]
-    [Migration("20240723193805_InitialBuild")]
+    [Migration("20240725160344_InitialBuild")]
     partial class InitialBuild
     {
         /// <inheritdoc />
@@ -267,6 +267,9 @@ namespace one2Do.Migrations
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime(6)");

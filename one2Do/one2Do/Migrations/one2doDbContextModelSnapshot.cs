@@ -265,6 +265,9 @@ namespace one2Do.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime(6)");
 

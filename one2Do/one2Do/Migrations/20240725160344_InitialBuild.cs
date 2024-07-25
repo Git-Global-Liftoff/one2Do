@@ -291,7 +291,9 @@ namespace one2Do.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     DueDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    IsCompleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    IsCompleted = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Description = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {

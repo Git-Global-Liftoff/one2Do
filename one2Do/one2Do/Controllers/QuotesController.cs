@@ -98,5 +98,12 @@ namespace one2Do
             model.Quotes = await _quoteService.GetQuotesAsync();
             return View("Index", model);
         }
+       public async Task<IActionResult> List()
+        {
+            var savedQuotes = await _dbContext.SavedQuotes.ToListAsync();
+            // var viewModel = new SelectedQuoteViewModel { SavedQuotes = savedQuotes };
+            return View(savedQuotes);
+        } 
     }
+
 }

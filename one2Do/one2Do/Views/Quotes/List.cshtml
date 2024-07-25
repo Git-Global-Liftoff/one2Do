@@ -1,0 +1,33 @@
+@model IEnumerable<SavedQuote>
+
+@{
+    ViewData["Title"] = "Saved Quotes";
+}
+
+<h1>Saved Quotes</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Quote Text</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var quote in Model)
+        {
+            <tr>
+                <td>@quote.Text</td>
+                <td>
+               
+                    <a href="@Url.Action("Edit", "Quotes", new { id = quote.Id })" class="btn btn-primary">Edit</a> -->
+                    <a href="@Url.Action("Delete", "Quotes", new { id = quote.Id })" class="btn btn-danger">Delete</a> -->
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Index", "Quotes")" class="btn btn-secondary">Back to Quotes</a>
+
+

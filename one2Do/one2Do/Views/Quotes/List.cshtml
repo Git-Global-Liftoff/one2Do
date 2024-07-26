@@ -10,7 +10,7 @@
     <thead>
         <tr>
             <th>Quote Text</th>
-            <th>Actions</th>
+            @* <th>Actions</th> *@
         </tr>
     </thead>
     <tbody>
@@ -18,11 +18,11 @@
         {
             <tr>
                 <td>@quote.Text</td>
-                <td>
+                @* <td>
                
                     <a href="@Url.Action("Edit", "Quotes", new { id = quote.Id })" class="btn btn-primary">Edit</a> -->
                     <a href="@Url.Action("Delete", "Quotes", new { id = quote.Id })" class="btn btn-danger">Delete</a> -->
-                </td>
+                </td> *@
             </tr>
         }
     </tbody>

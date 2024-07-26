@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System;   
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -74,7 +74,7 @@ namespace one2Do
                     Console.WriteLine("added");
                     await _dbContext.SaveChangesAsync();
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("List");
                 }
                 catch (Exception ex)
                 {

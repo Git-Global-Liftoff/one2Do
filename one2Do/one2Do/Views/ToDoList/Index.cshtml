@@ -1,8 +1,43 @@
 @model one2Do.ViewModels.ToDoListViewModel
 
 
+
+
 <h2>ToDo Lists</h2>
 
+<form asp-action="Index" method="get">
+    <div class="form-group">
+        <label asp-for="SelectedCategoryId">Filter by Category</label>
+        <select asp-for="SelectedCategoryId" asp-items="Model.Categories" class="form-control">
+            <option value="">-- All Categories --</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
+@* <table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Due Date</th>
+            <th>Completed Tasks</th>
+            <th>Total Tasks</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ToDoItems)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.CategoryName</td>
+                @* <td>@item.DueDate.ToShortDateString()</td> *@
+                @* <td>@item.CompletedTasks</td>
+                <td>@item.TotalTasks</td>
+            </tr>
+        }
+    </tbody>
+</table> *@ 
    
 @foreach (var list in Model.ToDoItems)
 {
